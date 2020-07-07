@@ -1,5 +1,5 @@
 <?php
-class ModelExtensionModuleOcnCategoryWall extends Model {
+class ModelExtensionModuleOcnCategoryWallPro extends Model {
 	public function getCategories($parent_id = 0, $limit = 0) {
 		$query = "SELECT * FROM " . DB_PREFIX . "category c";
 		$query .= " LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id)";

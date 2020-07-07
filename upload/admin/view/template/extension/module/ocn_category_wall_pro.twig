@@ -56,8 +56,8 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
                 <div class="col-sm-10">
-                  <select name="module_ocn_category_wall_status" id="input-status" class="form-control">
-                    {% if module_ocn_category_wall_status %}
+                  <select name="module_ocn_category_wall_pro_status" id="input-status" class="form-control">
+                    {% if module_ocn_category_wall_pro_status %}
                       <option value="1" selected="selected">{{ text_enabled }}</option>
                       <option value="0">{{ text_disabled }}</option>
                     {% else %}
@@ -70,7 +70,7 @@
               <div class="form-group required">
                 <label class="col-sm-2 control-label" for="input-title">{{ entry_title }}</label>
                 <div class="col-sm-10">
-                  <input type="text" name="module_ocn_category_wall_title" value="{{ module_ocn_category_wall_title }}" placeholder="{{ entry_title }}" id="input-title" class="form-control">
+                  <input type="text" name="module_ocn_category_wall_pro_title" value="{{ module_ocn_category_wall_pro_title }}" placeholder="{{ entry_title }}" id="input-title" class="form-control">
                   {% if error_title %}
                     <div class="text-danger">{{ error_title }}</div>
                   {% endif %}
@@ -81,8 +81,8 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-image-status">{{ entry_image }}</label>
                 <div class="col-sm-10">
-                  <select name="module_ocn_category_wall_image_status" id="input-image-status" class="form-control">
-                    {% if module_ocn_category_wall_image_status %}
+                  <select name="module_ocn_category_wall_pro_image_status" id="input-image-status" class="form-control">
+                    {% if module_ocn_category_wall_pro_image_status %}
                       <option value="1" selected="selected">{{ text_enabled }}</option>
                       <option value="0">{{ text_disabled }}</option>
                     {% else %}
@@ -95,7 +95,7 @@
               <div class="form-group required">
                 <label class="col-sm-2 control-label" for="input-image-width">{{ entry_image_width }}</label>
                 <div class="col-sm-10">
-                  <input type="text" name="module_ocn_category_wall_image_width" value="{{ module_ocn_category_wall_image_width }}" placeholder="220" id="input-image-width" class="form-control">
+                  <input type="text" name="module_ocn_category_wall_pro_image_width" value="{{ module_ocn_category_wall_pro_image_width }}" placeholder="220" id="input-image-width" class="form-control">
                   {% if error_width %}
                     <div class="text-danger">{{ error_width }}</div>
                   {% endif %}
@@ -104,7 +104,7 @@
               <div class="form-group required">
                 <label class="col-sm-2 control-label" for="input-image-height">{{ entry_image_height }}</label>
                 <div class="col-sm-10">
-                  <input type="text" name="module_ocn_category_wall_image_height" value="{{ module_ocn_category_wall_image_height }}" placeholder="80" id="input-image-height" class="form-control">
+                  <input type="text" name="module_ocn_category_wall_pro_image_height" value="{{ module_ocn_category_wall_pro_image_height }}" placeholder="80" id="input-image-height" class="form-control">
                   {% if error_height %}
                     <div class="text-danger">{{ error_height }}</div>
                   {% endif %}
@@ -113,8 +113,8 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-description-status">{{ entry_description }}</label>
                 <div class="col-sm-10">
-                  <select name="module_ocn_category_wall_description_status" id="input-description-status" class="form-control">
-                    {% if module_ocn_category_wall_description_status %}
+                  <select name="module_ocn_category_wall_pro_description_status" id="input-description-status" class="form-control">
+                    {% if module_ocn_category_wall_pro_description_status %}
                       <option value="1" selected="selected">{{ text_enabled }}</option>
                       <option value="0">{{ text_disabled }}</option>
                     {% else %}
@@ -127,7 +127,7 @@
               <div class="form-group required">
                 <label class="col-sm-2 control-label" for="input-description-length">{{ entry_description_length }}</label>
                 <div class="col-sm-10">
-                  <input type="text" name="module_ocn_category_wall_description_length" value="{{ module_ocn_category_wall_description_length }}" placeholder="{{ placeholder_limit_cancel }}" id="input-description-length" class="form-control">
+                  <input type="text" name="module_ocn_category_wall_pro_description_length" value="{{ module_ocn_category_wall_pro_description_length }}" placeholder="{{ placeholder_limit_cancel }}" id="input-description-length" class="form-control">
                   {% if error_length %}
                     <div class="text-danger">{{ error_length }}</div>
                   {% endif %}
@@ -138,8 +138,8 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-subcategory-status">{{ entry_subcategory }}</label>
                 <div class="col-sm-10">
-                  <select name="module_ocn_category_wall_subcategory_status" id="input-subcategory-status" class="form-control">
-                    {% if module_ocn_category_wall_subcategory_status %}
+                  <select name="module_ocn_category_wall_pro_subcategory_status" id="input-subcategory-status" class="form-control">
+                    {% if module_ocn_category_wall_pro_subcategory_status %}
                       <option value="1" selected="selected">{{ text_enabled }}</option>
                       <option value="0">{{ text_disabled }}</option>
                     {% else %}
@@ -152,7 +152,7 @@
               <div class="form-group required">
                 <label class="col-sm-2 control-label" for="input-subcategory-limit">{{ entry_subcategory_limit }}</label>
                 <div class="col-sm-10">
-                  <input type="text" name="module_ocn_category_wall_subcategory_limit" value="{{ module_ocn_category_wall_subcategory_limit }}" placeholder="{{ placeholder_limit_cancel }}" id="input-subcategory-limit" class="form-control">
+                  <input type="text" name="module_ocn_category_wall_pro_subcategory_limit" value="{{ module_ocn_category_wall_pro_subcategory_limit }}" placeholder="{{ placeholder_limit_cancel }}" id="input-subcategory-limit" class="form-control">
                   {% if error_limit %}
                     <div class="text-danger">{{ error_limit }}</div>
                   {% endif %}
@@ -161,8 +161,8 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-subcategory-collapse-status">{{ entry_collapse }}</label>
                 <div class="col-sm-10">
-                  <select name="module_ocn_category_wall_subcategory_collapse_status" id="input-subcategory-collapse-status" class="form-control">
-                    {% if module_ocn_category_wall_subcategory_collapse_status %}
+                  <select name="module_ocn_category_wall_pro_subcategory_collapse_status" id="input-subcategory-collapse-status" class="form-control">
+                    {% if module_ocn_category_wall_pro_subcategory_collapse_status %}
                       <option value="1" selected="selected">{{ text_enabled }}</option>
                       <option value="0">{{ text_disabled }}</option>
                     {% else %}
