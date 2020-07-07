@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <modification>
-  <name>[OCN] Category Wall EXT</name>
-  <code>ocn__category_wall</code>
-  <version>3.0.0.1</version>
+  <name>[OCN] Category Wall Pro</name>
+  <code>ocn__category_wall_pro</code>
+  <version>3.0.0.0</version>
   <author>Hkr</author>
-  <link>https://forum.opencart.name/resources/32/</link>
-  <date>01.07.2020</date>
+  <link>https://forum.opencart.name/resources/50/</link>
+  <date>07.07.2020</date>
 </modification>
