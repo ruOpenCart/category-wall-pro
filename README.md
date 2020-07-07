@@ -32,5 +32,5 @@
 [GNU General Public License version 3 (GPLv3)](LICENSE)
 
 ## Ссылки
-- [Ресурс на форуме](https://forum.opencart.name/resources/Стена-Категорий.32/)
-- [Тема поддержки расширения](https://forum.opencart.name/threads/Стена-Категорий.56/)
+- [Ресурс на форуме](https://forum.opencart.name/resources/Стена-Категорий-Про.50/)
+- [Тема поддержки расширения](https://forum.opencart.name/threads/Стена-Категорий-Про.74/)
