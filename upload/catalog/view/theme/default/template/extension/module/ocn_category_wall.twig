@@ -1,35 +1,63 @@
-<h3>{{ title }}</h3>
-<div class="row">
-  {% for category in categories %}
-    <div class="product-layout col-xs-12 col-sm-6 col-md-3 col-lg-3">
-      <div class="panel panel-primary category-wall-panel">
-        <div class="panel-heading category-wall-panel-heading">
-          <h4 class="panel-title category-wall-panel-title text-center">
-            <a href="{{ category.href }}" class="category-wall-panel-title-link">{{ category.name }}</a>
-          </h4>
-        </div>
-        {% if category.image_status or category.description %}
-        <div class="panel-body category-wall-panel-body text-center">
-          {% if category.image_status %}
-          <a href="{{ category.href }}" class="thumbnail category-wall-panel-body-link">
-            <img src="{{ category.image }}" alt="{{ category.name }}" class="category-wall-panel-body-image">
-          </a>
-          {% endif %}
-          {% if category.description %}
-            <p class="category-wall-panel-body-description">{{ category.description }}</p>
-          {% endif %}
-        </div>
-        {% endif %}
-        {% if category.children %}
-          <div class="panel-footer category-wall-panel-footer">
-            <div class="list-group category-wall-list-group">
-              {% for child in category.children %}
-                <a href="{{ child.href }}" class="list-group-item category-wall-list-group-item">{{ child.name }}</a>
-              {% endfor %}
-            </div>
+<div id="category-wall" data-show="{{ text_show }}" data-hide="{{ text_hide }}">
+  <h3>{{ title }}</h3>
+  <div class="row">
+    {% for category in categories %}
+      <div class="product-layout col-xs-12 col-sm-6 col-md-3 col-lg-3">
+        <div class="panel panel-primary category-wall-panel">
+          <div class="panel-heading category-wall-panel-heading">
+            <h4 class="panel-title category-wall-panel-title text-center">
+              <a href="{{ category.href }}" class="category-wall-panel-title-link">{{ category.name }}</a>
+            </h4>
           </div>
-        {% endif %}
+          {% if image_status or category.description %}
+          <div class="panel-body category-wall-panel-body text-center">
+            {% if image_status %}
+            <a href="{{ category.href }}" class="thumbnail category-wall-panel-body-link">
+              <img src="{{ category.image }}" alt="{{ category.name }}" class="category-wall-panel-body-image">
+            </a>
+            {% endif %}
+            {% if category.description %}
+              <p class="category-wall-panel-body-description">{{ category.description }}</p>
+            {% endif %}
+          </div>
+          {% endif %}
+          {% if category.children %}
+            <div class="panel-footer category-wall-panel-footer">
+              {% if subcategory_collapse_status %}
+                <a class="btn btn-primary btn-block collapsed" role="button" data-toggle="collapse" href="#collapseSubCategory{{ category.category_id }}" aria-expanded="false" aria-controls="collapseSubCategory{{ category.category_id }}">
+                  {{ button_show_hide }}
+                </a>
+                <div class="collapse" id="collapseSubCategory{{ category.category_id }}">
+              {% endif %}
+
+              <div class="list-group category-wall-list-group">
+                {% for child in category.children %}
+                  <a href="{{ child.href }}" class="list-group-item category-wall-list-group-item">{{ child.name }}</a>
+                {% endfor %}
+              </div>
+
+              {% if subcategory_collapse_status %}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
       </div>
-    </div>
-  {% endfor %}
+    {% endfor %}
+  </div>
 </div>
+<script>
+$(document).ready(function() {
+    let categoryWall = $('#category-wall');
+    const textShow = categoryWall.attr('data-show');
+    const textHide = categoryWall.attr('data-hide');
+    $('#category-wall')
+        .on('click', 'a.btn.btn-primary.btn-block', function() {
+            if ($(this).hasClass("collapsed")) {
+                $(this).text(textHide)
+            } else {
+                $(this).text(textShow)
+            }
+        });
+});
+</script>

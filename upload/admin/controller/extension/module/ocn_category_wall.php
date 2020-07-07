@@ -139,6 +139,12 @@ class ControllerExtensionModuleOCNCategoryWall extends Controller {
 			$data['module_ocn_category_wall_subcategory_limit'] = $this->config->get('module_ocn_category_wall_subcategory_limit');
 		}
 		
+		if (isset($this->request->post['module_ocn_category_wall_subcategory_collapse_status'])) {
+			$data['module_ocn_category_wall_subcategory_collapse_status'] = $this->request->post['module_ocn_category_wall_subcategory_collapse_status'];
+		} else {
+			$data['module_ocn_category_wall_subcategory_collapse_status'] = $this->config->get('module_ocn_category_wall_subcategory_collapse_status');
+		}
+		
 		if (isset($this->request->post['module_ocn_category_wall_description_status'])) {
 			$data['module_ocn_category_wall_description_status'] = $this->request->post['module_ocn_category_wall_description_status'];
 		} else {

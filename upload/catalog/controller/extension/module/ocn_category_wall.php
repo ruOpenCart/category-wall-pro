@@ -2,6 +2,8 @@
 class ControllerExtensionModuleOCNCategoryWall extends Controller {
 	public function index() {
 		$this->document->addStyle('catalog/view/theme/default/stylesheet/ocn/category-wall.css');
+		
+		$this->load->language('extension/module/ocn_category_wall');
 
 		$this->load->model('catalog/category');
 		$this->load->model('extension/module/ocn_category_wall');
@@ -15,6 +17,9 @@ class ControllerExtensionModuleOCNCategoryWall extends Controller {
 		$length = $this->config->get('module_ocn_category_wall_description_length');
 
 		$categories = $this->model_extension_module_ocn_category_wall->getCategories($category_id);
+		
+		$data['image_status'] = $this->config->get('module_ocn_category_wall_image_status');
+		$data['subcategory_collapse_status'] = $this->config->get('module_ocn_category_wall_subcategory_collapse_status');
 
 		foreach ($categories as $category) {
 			// Level 2
@@ -34,8 +39,7 @@ class ControllerExtensionModuleOCNCategoryWall extends Controller {
 			
 			// Level 1
 			$image = '';
-			$image_status = $this->config->get('module_ocn_category_wall_image_status');
-			if ($image_status) {
+			if ($data['image_status']) {
 				if ($category['image']) {
 					$image = $this->model_tool_image->resize($category['image'], $this->config->get('module_ocn_category_wall_image_width'), $this->config->get('module_ocn_category_wall_image_height'));
 				} else {
@@ -52,13 +56,12 @@ class ControllerExtensionModuleOCNCategoryWall extends Controller {
 			}
 			
 			$data['categories'][] = array(
-				'category_id' => $category_id,
-				'name'        => $category['name'],
-				'image'       => $image,
-				'image_status'=> $image_status,
-				'description' => $description,
-				'children'    => $children_data,
-				'href'        => $this->url->link('product/category', 'path=' . $category['category_id'])
+				'category_id'     => $category['category_id'],
+				'name'            => $category['name'],
+				'image'           => $image,
+				'description'     => $description,
+				'children'        => $children_data,
+				'href'            => $this->url->link('product/category', 'path=' . $category['category_id'])
 			);
 		}
 

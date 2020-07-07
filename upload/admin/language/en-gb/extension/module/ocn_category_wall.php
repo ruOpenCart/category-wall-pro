@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']                  = '[OCN] Category Wall';
+$_['heading_title']                  = '[OCN] Category Wall Pro';
 
 // Button
 $_['button_apply']                   = 'Apply';
@@ -28,6 +28,7 @@ $_['entry_image_height']             = 'Image height';
 $_['entry_description']              = 'Category Description';
 $_['entry_description_length']       = 'Description Length';
 $_['entry_subcategory']              = 'Subcategories';
+$_['entry_collapse']                 = 'Collapsible';
 $_['entry_subcategory_limit']        = 'Subcategory Limit';
 
 // Placeholder

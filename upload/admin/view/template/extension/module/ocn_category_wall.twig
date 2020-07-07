@@ -158,6 +158,20 @@
                   {% endif %}
                 </div>
               </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-subcategory-collapse-status">{{ entry_collapse }}</label>
+                <div class="col-sm-10">
+                  <select name="module_ocn_category_wall_subcategory_collapse_status" id="input-subcategory-collapse-status" class="form-control">
+                    {% if module_ocn_category_wall_subcategory_collapse_status %}
+                      <option value="1" selected="selected">{{ text_enabled }}</option>
+                      <option value="0">{{ text_disabled }}</option>
+                    {% else %}
+                      <option value="1">{{ text_enabled }}</option>
+                      <option value="0" selected="selected">{{ text_disabled }}</option>
+                    {% endif %}
+                  </select>
+                </div>
+              </div>
             </div>
             <div class="tab-pane fade" id="tab-info">
               <div class="row">

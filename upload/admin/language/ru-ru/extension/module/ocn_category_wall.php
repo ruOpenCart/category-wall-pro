@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']                  = '[OCN] Стена Категорий';
+$_['heading_title']                  = '[OCN] Стена Категорий Про';
 
 // Button
 $_['button_apply']                   = 'Применить';
@@ -28,6 +28,7 @@ $_['entry_image_height']             = 'Высота изображения';
 $_['entry_description']              = 'Описание категории';
 $_['entry_description_length']       = 'Длина описания';
 $_['entry_subcategory']              = 'Подкатегории';
+$_['entry_collapse']                 = 'Сворачиваемые';
 $_['entry_subcategory_limit']        = 'Лимит подкатегорий';
 
 // Placeholder
