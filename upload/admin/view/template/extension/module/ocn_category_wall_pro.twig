@@ -15,13 +15,20 @@
     </div>
   </div>
   <div class="container-fluid">
+    {% if success %}
+      <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div>
+    {% endif %}
     {% if error_warning %}
     <div class="alert alert-danger alert-dismissible">
       <i class="fa fa-exclamation-circle"></i> {{ error_warning }} <button type="button" class="close" data-dismiss="alert">&times;</button>
       {% if error_title or error_width or error_height or error_length or error_limit %}
         <ul>
           {% if error_title %}
-            <li class="text-muted">{{ error_title }}</li>
+            {% for title in error_title %}
+              <li class="text-muted">{{ title }}</li>
+            {% endfor %}
           {% endif %}
           {% if error_width %}
             <li class="text-muted">{{ error_width }}</li>
@@ -53,6 +60,27 @@
           </ul>
           <div class="tab-content">
             <div class="tab-pane fade in active" id="tab-general">
+              <ul class="nav nav-tabs" id="language">
+                {% for language in languages %}
+                  <li {% if loop.first %}class="active"{% endif %}><a href="#language{{ language.language_id }}" data-toggle="tab"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /> {{ language.name }}</a></li>
+                {% endfor %}
+              </ul>
+              <div class="tab-content">
+                {% for language in languages %}
+                <div class="tab-pane {% if loop.first %}active{% endif %}" id="language{{ language.language_id }}">
+                  <div class="form-group required">
+                    <label class="col-sm-2 control-label" for="input-title--{{ language.language_id }}">{{ entry_title }}</label>
+                    <div class="col-sm-10">
+                      <input type="text" name="module_ocn_category_wall_pro_title--{{ language.language_id }}" value="{{ module_ocn_category_wall_pro_title[language.language_id] }}" placeholder="{{ entry_title }}" id="input-title--{{ language.language_id }}" class="form-control">
+                      {% if error_title[language.language_id] %}
+                        <div class="text-danger">{{ error_title[language.language_id] }}</div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              <hr>
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
                 <div class="col-sm-10">
@@ -65,15 +93,6 @@
                       <option value="0" selected="selected">{{ text_disabled }}</option>
                     {% endif %}
                   </select>
-                </div>
-              </div>
-              <div class="form-group required">
-                <label class="col-sm-2 control-label" for="input-title">{{ entry_title }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="module_ocn_category_wall_pro_title" value="{{ module_ocn_category_wall_pro_title }}" placeholder="{{ entry_title }}" id="input-title" class="form-control">
-                  {% if error_title %}
-                    <div class="text-danger">{{ error_title }}</div>
-                  {% endif %}
                 </div>
               </div>
             </div>
@@ -180,19 +199,15 @@
                       <tbody>
                       <tr>
                         <td>{{ text_name }}:</td>
-                        <td><a href="https://forum.opencart.name/resources/32/" target="_blank">{{ heading_title }}</a></td>
-                      </tr>
-                      <tr>
-                        <td>{{ text_support }}:</td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>{{ text_version }}:</td>
-                        <td>3.0.0.1</td>
+                        <td><a href="{{ data_extension_link }}" target="_blank">{{ heading_title }}</a></td>
                       </tr>
                       <tr>
                         <td>{{ text_author }}:</td>
-                        <td><a href="https://forum.opencart.name/members/hkr.3/" target="_blank">Hkr</a></td>
+                        <td><a href="{{ data_author_link }}" target="_blank">{{ data_author_name }}</a></td>
+                      </tr>
+                      <tr>
+                        <td>{{ text_version }}:</td>
+                        <td>{{ data_version }}</td>
                       </tr>
                       </tbody>
                     </table>
@@ -202,6 +217,7 @@
           </div>
         </form>
       </div>
+      <div class="panel-footer">{{ heading_title }} v{{ data_version }}</div>
     </div>
   </div>
 </div>

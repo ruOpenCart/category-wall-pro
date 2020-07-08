@@ -2,6 +2,12 @@
 // Heading
 $_['heading_title']                  = '[OCN] Стена Категорий Про';
 
+// Data
+$_['data_version']                   = '3.0.0.1';
+$_['data_author_name']               = 'Hkr';
+$_['data_author_link']               = 'https://forum.opencart.name/members/hkr.3/';
+$_['data_extension_link']            = 'https://forum.opencart.name/resources/32/';
+
 // Button
 $_['button_apply']                   = 'Применить';
 
@@ -17,7 +23,6 @@ $_['text_edit']                      = 'Редактировать модуль 
 $_['text_name']                      = 'Наименование расширения';
 $_['text_version']                   = 'Версия расширения';
 $_['text_author']                    = 'Автор расширения';
-$_['text_support']                   = 'Поддержка расширения';
 
 // Entry
 $_['entry_status']                   = 'Статус';
