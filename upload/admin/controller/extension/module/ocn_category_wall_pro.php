@@ -26,9 +26,9 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 	
 	public function install() {
 		$this->load->model('setting/setting');
+		
 		$data = [
 			'module_ocn_category_wall_pro_status' => 0,
-			'module_ocn_category_wall_pro_title' => '[OCN] Стена Категорий',
 			'module_ocn_category_wall_pro_image_status' => 1,
 			'module_ocn_category_wall_pro_image_width' => 220,
 			'module_ocn_category_wall_pro_image_height' => 80,
@@ -37,6 +37,19 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 			'module_ocn_category_wall_pro_description_status' => 1,
 			'module_ocn_category_wall_pro_description_length' => 30
 		];
+		
+		$this->load->model('localisation/language');
+		$data['languages'] = $this->model_localisation_language->getLanguages();
+		
+		foreach ($data['languages'] as $language) {
+			$title = 'module_ocn_category_wall_pro_title--' . $language['language_id'];
+			if ($language['code'] == 'ru-ru') {
+				$data[$title] = '[OCN] Стена Категорий';
+			} else {
+				$data[$title] = '[OCN] Category Wall';
+			}
+		}
+		
 		$this->model_setting_setting->editSetting('module_ocn_category_wall_pro', $data);
 	}
 	
@@ -45,6 +58,14 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 			$data['error_warning'] = $this->error['warning'];
 		} else {
 			$data['error_warning'] = '';
+		}
+		
+		if (isset($this->session->data['success'])) {
+			$data['success'] = $this->session->data['success'];
+			
+			unset($this->session->data['success']);
+		} else {
+			$data['success'] = '';
 		}
 		
 		if (isset($this->error['title'])) {
@@ -97,16 +118,24 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 		$data['action'] = $this->url->link('extension/module/ocn_category_wall_pro', 'user_token=' . $this->session->data['user_token'], true);
 		$data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true);
 		
+		$this->load->model('localisation/language');
+		$data['languages'] = $this->model_localisation_language->getLanguages();
+		
+		foreach ($data['languages'] as $language) {
+			$title = 'module_ocn_category_wall_pro_title--' . $language['language_id'];
+			if (isset($this->request->post[$title])) {
+				$data['module_ocn_category_wall_pro_title'][$language['language_id']] = $this->request->post[$title];
+			} elseif ($this->request->server['REQUEST_METHOD'] != 'POST') {
+				$data['module_ocn_category_wall_pro_title'][$language['language_id']] = $this->config->get($title);
+			} else {
+				$data['module_ocn_category_wall_pro_title'][$language['language_id']] = '';
+			}
+		}
+		
 		if (isset($this->request->post['module_ocn_category_wall_pro_status'])) {
 			$data['module_ocn_category_wall_pro_status'] = $this->request->post['module_ocn_category_wall_pro_status'];
 		} else {
 			$data['module_ocn_category_wall_pro_status'] = $this->config->get('module_ocn_category_wall_pro_status');
-		}
-		
-		if (isset($this->request->post['module_ocn_category_wall_pro_title'])) {
-			$data['module_ocn_category_wall_pro_title'] = $this->request->post['module_ocn_category_wall_pro_title'];
-		} else {
-			$data['module_ocn_category_wall_pro_title'] = $this->config->get('module_ocn_category_wall_pro_title');
 		}
 		
 		if (isset($this->request->post['module_ocn_category_wall_pro_image_status'])) {
@@ -169,8 +198,14 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 		
-		if ((utf8_strlen($this->request->post['module_ocn_category_wall_pro_title']) < 1) || (utf8_strlen($this->request->post['module_ocn_category_wall_pro_title']) > 255)) {
-			$this->error['title'] = $this->language->get('error_title');
+		$this->load->model('localisation/language');
+		$data['languages'] = $this->model_localisation_language->getLanguages();
+
+		foreach ($data['languages'] as $language) {
+			$title = 'module_ocn_category_wall_pro_title--' . $language['language_id'];
+			if ((utf8_strlen($this->request->post[$title]) < 1) || (utf8_strlen($this->request->post[$title]) > 255)) {
+				$this->error['title'][$language['language_id']] = $this->language->get('error_title');
+			}
 		}
 		
 		if (!$this->request->post['module_ocn_category_wall_pro_image_width']) {
