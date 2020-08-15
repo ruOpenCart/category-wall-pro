@@ -88,13 +88,8 @@
                 <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
                 <div class="col-sm-10">
                   <select name="module_ocn_category_wall_pro_status" id="input-status" class="form-control">
-                    {% if module_ocn_category_wall_pro_status %}
-                      <option value="1" selected="selected">{{ text_enabled }}</option>
-                      <option value="0">{{ text_disabled }}</option>
-                    {% else %}
-                      <option value="1">{{ text_enabled }}</option>
-                      <option value="0" selected="selected">{{ text_disabled }}</option>
-                    {% endif %}
+                    <option value="1" {% if module_ocn_category_wall_pro_status == 1 %}selected="selected"{% endif %}>{{ text_enabled }}</option>
+                    <option value="0" {% if module_ocn_category_wall_pro_status == 0 %}selected="selected"{% endif %}>{{ text_disabled }}</option>
                   </select>
                 </div>
               </div>
@@ -104,13 +99,8 @@
                 <label class="col-sm-2 control-label" for="input-image-status">{{ entry_image }}</label>
                 <div class="col-sm-10">
                   <select name="module_ocn_category_wall_pro_image_status" id="input-image-status" class="form-control">
-                    {% if module_ocn_category_wall_pro_image_status %}
-                      <option value="1" selected="selected">{{ text_enabled }}</option>
-                      <option value="0">{{ text_disabled }}</option>
-                    {% else %}
-                      <option value="1">{{ text_enabled }}</option>
-                      <option value="0" selected="selected">{{ text_disabled }}</option>
-                    {% endif %}
+                    <option value="1" {% if module_ocn_category_wall_pro_image_status == 1 %}selected="selected"{% endif %}>{{ text_enabled }}</option>
+                    <option value="0" {% if module_ocn_category_wall_pro_image_status == 0 %}selected="selected"{% endif %}>{{ text_disabled }}</option>
                   </select>
                 </div>
               </div>
@@ -136,13 +126,8 @@
                 <label class="col-sm-2 control-label" for="input-description-status">{{ entry_description }}</label>
                 <div class="col-sm-10">
                   <select name="module_ocn_category_wall_pro_description_status" id="input-description-status" class="form-control">
-                    {% if module_ocn_category_wall_pro_description_status %}
-                      <option value="1" selected="selected">{{ text_enabled }}</option>
-                      <option value="0">{{ text_disabled }}</option>
-                    {% else %}
-                      <option value="1">{{ text_enabled }}</option>
-                      <option value="0" selected="selected">{{ text_disabled }}</option>
-                    {% endif %}
+                    <option value="1" {% if module_ocn_category_wall_pro_description_status == 1 %}selected="selected"{% endif %}>{{ text_enabled }}</option>
+                    <option value="0" {% if module_ocn_category_wall_pro_description_status == 0 %}selected="selected"{% endif %}>{{ text_disabled }}</option>
                   </select>
                 </div>
               </div>
@@ -159,8 +144,8 @@
                 <label class="col-sm-2 control-label" for="input-categories-type">{{ entry_category_type }}</label>
                 <div class="col-sm-10">
                   <select name="module_ocn_category_wall_pro_categories_type" class="form-control" id="input-categories-type">
-                    <option value="all" {% if module_ocn_category_wall_pro_categories_type == 'all' %} selected="selected" {% endif %}>{{ text_category_type_all }}</option>
-                    <option value="selected" {% if module_ocn_category_wall_pro_categories_type == 'selected' %} selected="selected" {% endif %}>{{ text_category_type_selected }}</option>
+                    <option value="all" {% if module_ocn_category_wall_pro_categories_type == 'all' %}selected="selected"{% endif %}>{{ text_category_type_all }}</option>
+                    <option value="selected" {% if module_ocn_category_wall_pro_categories_type == 'selected' %}selected="selected"{% endif %}>{{ text_category_type_selected }}</option>
                   </select>
                   <i class="text-info">{{ help_categories_type }}</i>
                 </div>
@@ -190,13 +175,8 @@
                 <label class="col-sm-2 control-label" for="input-subcategory-status">{{ entry_subcategory }}</label>
                 <div class="col-sm-10">
                   <select name="module_ocn_category_wall_pro_subcategory_status" id="input-subcategory-status" class="form-control">
-                    {% if module_ocn_category_wall_pro_subcategory_status %}
-                      <option value="1" selected="selected">{{ text_enabled }}</option>
-                      <option value="0">{{ text_disabled }}</option>
-                    {% else %}
-                      <option value="1">{{ text_enabled }}</option>
-                      <option value="0" selected="selected">{{ text_disabled }}</option>
-                    {% endif %}
+                    <option value="1" {% if module_ocn_category_wall_pro_subcategory_status == 1 %}selected="selected"{% endif %}>{{ text_enabled }}</option>
+                    <option value="0" {% if module_ocn_category_wall_pro_subcategory_status == 0 %}selected="selected"{% endif %}>{{ text_disabled }}</option>
                   </select>
                 </div>
               </div>
@@ -213,13 +193,8 @@
                 <label class="col-sm-2 control-label" for="input-subcategory-collapse-status">{{ entry_collapse }}</label>
                 <div class="col-sm-10">
                   <select name="module_ocn_category_wall_pro_subcategory_collapse_status" id="input-subcategory-collapse-status" class="form-control">
-                    {% if module_ocn_category_wall_pro_subcategory_collapse_status %}
-                      <option value="1" selected="selected">{{ text_enabled }}</option>
-                      <option value="0">{{ text_disabled }}</option>
-                    {% else %}
-                      <option value="1">{{ text_enabled }}</option>
-                      <option value="0" selected="selected">{{ text_disabled }}</option>
-                    {% endif %}
+                    <option value="1" {% if module_ocn_category_wall_pro_subcategory_collapse_status == 1 %}selected="selected"{% endif %}>{{ text_enabled }}</option>
+                    <option value="0" {% if module_ocn_category_wall_pro_subcategory_collapse_status == 0 %}selected="selected"{% endif %}>{{ text_disabled }}</option>
                   </select>
                 </div>
               </div>
@@ -279,7 +254,7 @@ $(window).on('load', function () {
     if (counter < 1 && $('#input-categories-type').val() == 'selected') {
       $('#form-group-categories i[data-count=true]').addClass('text-danger');
     } else {
-        $('#form-group-categories i[data-count=true]').removeClass('text-danger');
+      $('#form-group-categories i[data-count=true]').removeClass('text-danger');
     }
   }
 });
