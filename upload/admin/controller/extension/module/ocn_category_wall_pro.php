@@ -14,10 +14,12 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 
 			$this->session->data['success'] = $this->language->get('text_success');
 			
+			// If button apply
 			if (isset($this->request->post['apply']) && $this->request->post['apply']) {
 				$this->response->redirect($this->url->link('extension/module/ocn_category_wall_pro', 'user_token=' . $this->session->data['user_token'] . '&type=module', true));
 			}
 
+			// Go to list modules
 			$this->response->redirect($this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true));
 		}
 		
@@ -54,6 +56,9 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 	}
 	
 	protected function getForm() {
+		$data['user_token'] = $this->session->data['user_token'];
+		
+		//Errors
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
 		} else {
@@ -98,6 +103,7 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 			$data['error_length'] = array();
 		}
 		
+		// Breadcrumbs
 		$data['breadcrumbs'] = array();
 		
 		$data['breadcrumbs'][] = array(
@@ -115,9 +121,11 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 			'href' => $this->url->link('extension/module/ocn_category_wall_pro', 'user_token=' . $this->session->data['user_token'], true)
 		);
 		
+		// Buttons
 		$data['action'] = $this->url->link('extension/module/ocn_category_wall_pro', 'user_token=' . $this->session->data['user_token'], true);
 		$data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true);
 		
+		// Data form
 		$this->load->model('localisation/language');
 		$data['languages'] = $this->model_localisation_language->getLanguages();
 		
@@ -186,6 +194,23 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 			$data['module_ocn_category_wall_pro_description_length'] = $this->config->get('module_ocn_category_wall_pro_description_length');
 		}
 		
+		if (isset($this->request->post['module_ocn_category_wall_pro_categories'])) {
+			$data['module_ocn_category_wall_pro_categories'] = $this->request->post['module_ocn_category_wall_pro_categories'];
+		} else {
+			$data['module_ocn_category_wall_pro_categories'] = $this->config->get('module_ocn_category_wall_pro_categories');
+		}
+		
+		if (isset($this->request->post['module_ocn_category_wall_pro_categories_type'])) {
+			$data['module_ocn_category_wall_pro_categories_type'] = $this->request->post['module_ocn_category_wall_pro_categories_type'];
+		} else {
+			$data['module_ocn_category_wall_pro_categories_type'] = $this->config->get('module_ocn_category_wall_pro_categories_type');
+		}
+		
+		// Categories
+		$this->load->model('extension/module/ocn_category_wall_pro');
+		$data['categories'] = $this->model_extension_module_ocn_category_wall_pro->getCategories();
+		
+		// Templates
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');

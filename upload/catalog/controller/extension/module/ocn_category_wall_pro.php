@@ -15,8 +15,13 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 		$category_id = 0;
 		$limit = $this->config->get('module_ocn_category_wall_pro_subcategory_limit');
 		$length = $this->config->get('module_ocn_category_wall_pro_description_length');
-
-		$categories = $this->model_extension_module_ocn_category_wall_pro->getCategories($category_id);
+		$ids = $this->config->get('module_ocn_category_wall_pro_categories')
+			? implode(",", $this->config->get('module_ocn_category_wall_pro_categories'))
+			: '';
+		
+		$categories = $this->config->get('module_ocn_category_wall_pro_categories_type') == 'all'
+			? $this->model_extension_module_ocn_category_wall_pro->getCategories($category_id)
+			: $this->model_extension_module_ocn_category_wall_pro->getCategoriesByIds($ids);
 		
 		$data['image_status'] = $this->config->get('module_ocn_category_wall_pro_image_status');
 		$data['subcategory_collapse_status'] = $this->config->get('module_ocn_category_wall_pro_subcategory_collapse_status');

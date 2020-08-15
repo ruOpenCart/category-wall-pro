@@ -3,10 +3,10 @@
 $_['heading_title']                  = '[OCN] Category Wall Pro';
 
 // Data
-$_['data_version']                   = '3.0.0.1';
+$_['data_version']                   = '3.0.1.0';
 $_['data_author_name']               = 'Hkr';
 $_['data_author_link']               = 'https://forum.opencart.name/members/hkr.3/';
-$_['data_extension_link']            = 'https://forum.opencart.name/resources/50/';
+$_['data_extension_link']            = 'https://forum.opencart.name/resources/32/';
 
 // Button
 $_['button_apply']                   = 'Apply';
@@ -23,6 +23,8 @@ $_['text_edit']                      = 'Edit Category Wall Module';
 $_['text_name']                      = 'Extension name';
 $_['text_version']                   = 'Extension version';
 $_['text_author']                    = 'Extension author';
+$_['text_category_type_all']         = 'All parent categories';
+$_['text_category_type_selected']    = 'Selected parent categories';
 
 // Entry
 $_['entry_status']                   = 'Status';
@@ -35,6 +37,8 @@ $_['entry_description_length']       = 'Description Length';
 $_['entry_subcategory']              = 'Subcategories';
 $_['entry_collapse']                 = 'Collapsible';
 $_['entry_subcategory_limit']        = 'Subcategory Limit';
+$_['entry_category']                 = 'Categories';
+$_['entry_category_type']            = 'Type';
 
 // Placeholder
 $_['placeholder_limit_cancel']       = '0 to cancel the limit';
