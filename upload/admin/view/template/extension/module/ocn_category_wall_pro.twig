@@ -23,7 +23,7 @@
     {% if error_warning %}
     <div class="alert alert-danger alert-dismissible">
       <i class="fa fa-exclamation-circle"></i> {{ error_warning }} <button type="button" class="close" data-dismiss="alert">&times;</button>
-      {% if error_title or error_width or error_height or error_length or error_limit %}
+      {% if error_title or error_width or error_height or error_length or error_limit or error_categories_selected %}
         <ul>
           {% if error_title %}
             {% for title in error_title %}
@@ -41,6 +41,9 @@
           {% endif %}
           {% if error_limit %}
             <li class="text-muted">{{ error_limit }}</li>
+          {% endif %}
+          {% if error_categories_selected %}
+            <li class="text-muted">{{ error_categories_selected }}</li>
           {% endif %}
         </ul>
       {% endif %}
@@ -152,26 +155,33 @@
                   {% endif %}
                 </div>
               </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-image-status">{{ entry_category_type }}</label>
+              <div class="form-group" id="form-group-categories-type">
+                <label class="col-sm-2 control-label" for="input-categories-type">{{ entry_category_type }}</label>
                 <div class="col-sm-10">
-                  <select name="module_ocn_category_wall_pro_categories_type" class="form-control">
+                  <select name="module_ocn_category_wall_pro_categories_type" class="form-control" id="input-categories-type">
                     <option value="all" {% if module_ocn_category_wall_pro_categories_type == 'all' %} selected="selected" {% endif %}>{{ text_category_type_all }}</option>
                     <option value="selected" {% if module_ocn_category_wall_pro_categories_type == 'selected' %} selected="selected" {% endif %}>{{ text_category_type_selected }}</option>
                   </select>
+                  <i class="text-info">{{ help_categories_type }}</i>
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group" id="form-group-categories">
                 <label class="col-sm-2 control-label">{{ entry_category }}</label>
                 <div class="col-sm-10">
-                  <div class="well well-sm" style="height: 150px; overflow: auto;"> {% for category in categories %}
+                  <div class="well well-sm" style="height: 150px; overflow: auto;">
+                    {% for category in categories %}
                       <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="module_ocn_category_wall_pro_categories[]" value="{{ category.category_id }}" {% if category.category_id in module_ocn_category_wall_pro_categories %}checked="checked"{% endif %}>
-                            {{ category.name }}
-                          </label>
+                          <input type="checkbox" name="module_ocn_category_wall_pro_categories[]" value="{{ category.category_id }}" {% if category.category_id in module_ocn_category_wall_pro_categories %}checked="checked"{% endif %}>
+                          {{ category.name }}
+                        </label>
                       </div>
-                    {% endfor %}</div>
+                    {% endfor %}
+                  </div>
+                  <i class="text-info" data-text="{{ help_categories_selected }}" data-count="true"></i>
+                  {% if error_categories_selected %}
+                    <div class="text-danger">{{ error_categories_selected }}</div>
+                  {% endif %}
                 </div>
               </div>
             </div>
@@ -243,4 +253,35 @@
     </div>
   </div>
 </div>
+<script>
+$(window).on('load', function () {
+  checkType()
+  countCategories()
+
+  $('#input-categories-type').on('change', checkType);
+  $('#form-group-categories input').on('change', countCategories);
+
+  function checkType() {
+    if ($('#input-categories-type').val() == 'selected' && !$('#form-group-categories').hasClass('required')) {
+      $('#form-group-categories').addClass('required')
+      $('#form-group-categories-type i.text-info').removeClass('hidden')
+    } else {
+      $('#form-group-categories').removeClass('required')
+      $('#form-group-categories-type i.text-info').addClass('hidden')
+    }
+  }
+
+  function countCategories() {
+    let counter = $('#form-group-categories input:checked').length;
+    let text = $('#form-group-categories i.text-info').attr('data-text') + counter;
+    $('#form-group-categories i[data-count=true]').text(text);
+
+    if (counter < 1 && $('#input-categories-type').val() == 'selected') {
+      $('#form-group-categories i[data-count=true]').addClass('text-danger');
+    } else {
+        $('#form-group-categories i[data-count=true]').removeClass('text-danger');
+    }
+  }
+});
+</script>
 {{ footer }}

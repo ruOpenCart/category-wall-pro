@@ -40,6 +40,10 @@ $_['entry_subcategory_limit']        = 'Лимит подкатегорий';
 $_['entry_category']                 = 'Категории';
 $_['entry_category_type']            = 'Тип';
 
+// Help
+$_['help_categories_type']           = 'Для выбранных родительских категорий необходимо выбрать хотя бы одну категорию из списка ниже';
+$_['help_categories_selected']       = 'Категорий выбрано: ';
+
 // Placeholder
 $_['placeholder_limit_cancel']       = '0 для отмены лимита';
 
@@ -51,3 +55,4 @@ $_['error_width']                    = 'Ширина обязательна!';
 $_['error_height']                   = 'Высота обязательна!';
 $_['error_limit']                    = 'Лимит обязателен!';
 $_['error_length']                   = 'Длина обязательна!';
+$_['error_categories_selected']      = 'Необходимо выбрать как минимум одну категорию!';

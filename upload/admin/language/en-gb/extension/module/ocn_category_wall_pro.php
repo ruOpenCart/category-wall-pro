@@ -40,6 +40,10 @@ $_['entry_subcategory_limit']        = 'Subcategory Limit';
 $_['entry_category']                 = 'Categories';
 $_['entry_category_type']            = 'Type';
 
+// Help
+$_['help_categories_type']           = 'For the selected parent categories, you must select at least one category from the list below';
+$_['help_categories_selected']       = 'Categories selected: ';
+
 // Placeholder
 $_['placeholder_limit_cancel']       = '0 to cancel the limit';
 
@@ -51,3 +55,4 @@ $_['error_width']                    = 'Width required!';
 $_['error_height']                   = 'Height required!';
 $_['error_limit']                    = 'Limit required!';
 $_['error_length']                   = 'Length required!';
+$_['error_categories_selected']      = 'You must select at least one category!';

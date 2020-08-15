@@ -17,7 +17,7 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 		$length = $this->config->get('module_ocn_category_wall_pro_description_length');
 		$ids = $this->config->get('module_ocn_category_wall_pro_categories')
 			? implode(",", $this->config->get('module_ocn_category_wall_pro_categories'))
-			: '';
+			: 0;
 		
 		$categories = $this->config->get('module_ocn_category_wall_pro_categories_type') == 'all'
 			? $this->model_extension_module_ocn_category_wall_pro->getCategories($category_id)

@@ -37,7 +37,8 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 			'module_ocn_category_wall_pro_subcategory_status' => 1,
 			'module_ocn_category_wall_pro_subcategory_limit' => 2,
 			'module_ocn_category_wall_pro_description_status' => 1,
-			'module_ocn_category_wall_pro_description_length' => 30
+			'module_ocn_category_wall_pro_description_length' => 30,
+			'module_ocn_category_wall_pro_categories_type' => 'all'
 		];
 		
 		$this->load->model('localisation/language');
@@ -101,6 +102,12 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 			$data['error_length'] = $this->error['length'];
 		} else {
 			$data['error_length'] = array();
+		}
+		
+		if (isset($this->error['categories_selected'])) {
+			$data['error_categories_selected'] = $this->error['categories_selected'];
+		} else {
+			$data['error_categories_selected'] = array();
 		}
 		
 		// Breadcrumbs
@@ -247,6 +254,10 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 		
 		if (!$this->request->post['module_ocn_category_wall_pro_description_length'] && $this->request->post['module_ocn_category_wall_pro_description_length'] == '') {
 			$this->error['length'] = $this->language->get('error_length');
+		}
+		
+		if ($this->request->post['module_ocn_category_wall_pro_categories_type'] != 'all' && (!isset($this->request->post['module_ocn_category_wall_pro_categories']) || count($this->request->post['module_ocn_category_wall_pro_categories']) < 1)) {
+			$this->error['categories_selected'] = $this->language->get('error_categories_selected');
 		}
 		
 		if ($this->error && !isset($this->error['warning'])) {
