@@ -3,7 +3,7 @@
 $_['heading_title']                  = '[OCN] Стена Категорий Про';
 
 // Data
-$_['data_version']                   = '3.0.1.0';
+$_['data_version']                   = '3.0.2.0';
 $_['data_author_name']               = 'Hkr';
 $_['data_author_link']               = 'https://forum.opencart.name/members/hkr.3/';
 $_['data_extension_link']            = 'https://forum.opencart.name/resources/32/';
@@ -28,6 +28,7 @@ $_['text_category_type_selected']    = 'Выбранные родительск�
 
 // Entry
 $_['entry_status']                   = 'Статус';
+$_['entry_height_status']            = 'Фиксировать высоту';
 $_['entry_title']                    = 'Заголовок';
 $_['entry_image']                    = 'Изображение категории';
 $_['entry_image_width']              = 'Ширина изображения';

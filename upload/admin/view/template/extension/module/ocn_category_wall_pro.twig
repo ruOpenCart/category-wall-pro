@@ -93,6 +93,15 @@
                   </select>
                 </div>
               </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-height-status">{{ entry_height_status }}</label>
+                <div class="col-sm-10">
+                  <select name="module_ocn_category_wall_pro_height_status" id="input-height-status" class="form-control">
+                    <option value="1" {% if module_ocn_category_wall_pro_height_status == 1 %}selected="selected"{% endif %}>{{ text_enabled }}</option>
+                    <option value="0" {% if module_ocn_category_wall_pro_height_status == 0 %}selected="selected"{% endif %}>{{ text_disabled }}</option>
+                  </select>
+                </div>
+              </div>
             </div>
             <div class="tab-pane fade" id="tab-category">
               <div class="form-group">

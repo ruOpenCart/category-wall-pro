@@ -1,4 +1,4 @@
-<div id="category-wall" data-show="{{ text_show }}" data-hide="{{ text_hide }}">
+<div id="category-wall" data-show="{{ text_show }}" data-hide="{{ text_hide }}" data-height="{{ height_status }}">
   <h3>{{ title }}</h3>
   <div class="row">
     {% for category in categories %}
@@ -48,16 +48,35 @@
 </div>
 <script>
 $(document).ready(function() {
-    let categoryWall = $('#category-wall');
-    const textShow = categoryWall.attr('data-show');
-    const textHide = categoryWall.attr('data-hide');
-    $('#category-wall')
-        .on('click', 'a.btn.btn-primary.btn-block', function() {
-            if ($(this).hasClass("collapsed")) {
-                $(this).text(textHide)
-            } else {
-                $(this).text(textShow)
-            }
-        });
+  let categoryWall = $('#category-wall');
+  const textShow = categoryWall.attr('data-show');
+  const textHide = categoryWall.attr('data-hide');
+
+  categoryWall.on('click', 'a.btn.btn-primary.btn-block', function() {
+    if ($(this).hasClass("collapsed")) {
+      $(this).text(textHide)
+    } else {
+      $(this).text(textShow)
+    }
+  });
+
+  if (Number(categoryWall.attr('data-height')) === 1) {
+    setEqualHeight(categoryWall.find(".product-layout"));
+    setEqualHeight(categoryWall.find(".panel"));
+    setEqualHeight(categoryWall.find(".panel-heading"));
+    setEqualHeight(categoryWall.find(".panel-body"));
+    setEqualHeight(categoryWall.find(".panel-footer"));
+  }
+
+  function setEqualHeight(columns) {
+    let block = 0;
+    columns.each(function() {
+      height = $(this).height();
+      if(height > block) {
+          block = height;
+      }
+    });
+    columns.height(block);
+  }
 });
 </script>

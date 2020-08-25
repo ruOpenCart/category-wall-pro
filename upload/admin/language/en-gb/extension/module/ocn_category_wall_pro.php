@@ -3,7 +3,7 @@
 $_['heading_title']                  = '[OCN] Category Wall Pro';
 
 // Data
-$_['data_version']                   = '3.0.1.0';
+$_['data_version']                   = '3.0.2.0';
 $_['data_author_name']               = 'Hkr';
 $_['data_author_link']               = 'https://forum.opencart.name/members/hkr.3/';
 $_['data_extension_link']            = 'https://forum.opencart.name/resources/32/';
@@ -28,6 +28,7 @@ $_['text_category_type_selected']    = 'Selected parent categories';
 
 // Entry
 $_['entry_status']                   = 'Status';
+$_['entry_height_status']            = 'Fix height';
 $_['entry_title']                    = 'Title';
 $_['entry_image']                    = 'Category Image';
 $_['entry_image_width']              = 'Image width';

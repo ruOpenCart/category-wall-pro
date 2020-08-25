@@ -31,6 +31,7 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 		
 		$data = [
 			'module_ocn_category_wall_pro_status' => 0,
+			'module_ocn_category_wall_pro_height_status' => 1,
 			'module_ocn_category_wall_pro_image_status' => 1,
 			'module_ocn_category_wall_pro_image_width' => 220,
 			'module_ocn_category_wall_pro_image_height' => 80,
@@ -151,6 +152,11 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 			$data['module_ocn_category_wall_pro_status'] = $this->request->post['module_ocn_category_wall_pro_status'];
 		} else {
 			$data['module_ocn_category_wall_pro_status'] = $this->config->get('module_ocn_category_wall_pro_status');
+		}
+		if (isset($this->request->post['module_ocn_category_wall_pro_height_status'])) {
+			$data['module_ocn_category_wall_pro_height_status'] = $this->request->post['module_ocn_category_wall_pro_height_status'];
+		} else {
+			$data['module_ocn_category_wall_pro_height_status'] = $this->config->get('module_ocn_category_wall_pro_height_status');
 		}
 		
 		if (isset($this->request->post['module_ocn_category_wall_pro_image_status'])) {

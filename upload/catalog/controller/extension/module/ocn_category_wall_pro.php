@@ -1,8 +1,6 @@
 <?php
 class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 	public function index() {
-		$this->document->addStyle('catalog/view/theme/default/stylesheet/ocn/category-wall-pro.css');
-		
 		$this->load->language('extension/module/ocn_category_wall_pro');
 
 		$this->load->model('catalog/category');
@@ -23,6 +21,7 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 			? $this->model_extension_module_ocn_category_wall_pro->getCategories($category_id)
 			: $this->model_extension_module_ocn_category_wall_pro->getCategoriesByIds($ids);
 		
+		$data['height_status'] = $this->config->get('module_ocn_category_wall_pro_height_status');
 		$data['image_status'] = $this->config->get('module_ocn_category_wall_pro_image_status');
 		$data['subcategory_collapse_status'] = $this->config->get('module_ocn_category_wall_pro_subcategory_collapse_status');
 
