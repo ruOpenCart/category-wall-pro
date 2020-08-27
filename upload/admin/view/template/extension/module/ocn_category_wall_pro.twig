@@ -23,7 +23,7 @@
     {% if error_warning %}
     <div class="alert alert-danger alert-dismissible">
       <i class="fa fa-exclamation-circle"></i> {{ error_warning }} <button type="button" class="close" data-dismiss="alert">&times;</button>
-      {% if error_title or error_width or error_height or error_length or error_limit or error_categories_selected %}
+      {% if error_title or error_width or error_height or error_length or error_limit or error_categories_selected_minimum or error_categories_custom_minimum %}
         <ul>
           {% if error_title %}
             {% for title in error_title %}
@@ -42,8 +42,11 @@
           {% if error_limit %}
             <li class="text-muted">{{ error_limit }}</li>
           {% endif %}
-          {% if error_categories_selected %}
-            <li class="text-muted">{{ error_categories_selected }}</li>
+          {% if error_categories_selected_minimum %}
+            <li class="text-muted">{{ error_categories_selected_minimum }}</li>
+          {% endif %}
+          {% if error_categories_custom_minimum %}
+            <li class="text-muted">{{ error_categories_custom_minimum }}</li>
           {% endif %}
         </ul>
       {% endif %}
@@ -155,26 +158,49 @@
                   <select name="module_ocn_category_wall_pro_categories_type" class="form-control" id="input-categories-type">
                     <option value="all" {% if module_ocn_category_wall_pro_categories_type == 'all' %}selected="selected"{% endif %}>{{ text_category_type_all }}</option>
                     <option value="selected" {% if module_ocn_category_wall_pro_categories_type == 'selected' %}selected="selected"{% endif %}>{{ text_category_type_selected }}</option>
+                    <option value="custom" {% if module_ocn_category_wall_pro_categories_type == 'custom' %}selected="custom"{% endif %}>{{ text_category_type_custom }}</option>
                   </select>
-                  <i class="text-info">{{ help_categories_type }}</i>
+                  <i class="text-info" data-type="all">{{ help_categories_type_all }}</i>
+                  <i class="text-info" data-type="selected">{{ help_categories_type_selected }}</i>
+                  <i class="text-info" data-type="custom">{{ help_categories_type_custom }}</i>
                 </div>
               </div>
-              <div class="form-group" id="form-group-categories">
-                <label class="col-sm-2 control-label">{{ entry_category }}</label>
+              <div class="form-group" id="form-group-categories-selected">
+                <label class="col-sm-2 control-label">{{ entry_category_parent }}</label>
                 <div class="col-sm-10">
                   <div class="well well-sm" style="height: 150px; overflow: auto;">
-                    {% for category in categories %}
+                    {% for category in parent_categories %}
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" name="module_ocn_category_wall_pro_categories[]" value="{{ category.category_id }}" {% if category.category_id in module_ocn_category_wall_pro_categories %}checked="checked"{% endif %}>
+                          <input type="checkbox" name="module_ocn_category_wall_pro_categories_selected[]" value="{{ category.category_id }}" {% if category.category_id in module_ocn_category_wall_pro_categories_selected %}checked="checked"{% endif %}>
                           {{ category.name }}
                         </label>
                       </div>
                     {% endfor %}
                   </div>
                   <i class="text-info" data-text="{{ help_categories_selected }}" data-count="true"></i>
-                  {% if error_categories_selected %}
-                    <div class="text-danger">{{ error_categories_selected }}</div>
+                  {% if error_categories_selected_minimum %}
+                    <div class="text-danger">{{ error_categories_selected_minimum }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="form-group"  id="form-group-categories-custom">
+                <label class="col-sm-2 control-label" for="form-group-categories-input"><span data-toggle="tooltip" title="{{ help_category }}">{{ entry_category_custom }}</span></label>
+                <div class="col-sm-10">
+                  <input type="text" name="category" value="" placeholder="{{ entry_category }}" id="form-group-categories-input" class="form-control"/>
+                  <div id="product-category" class="well well-sm" style="height: 150px; overflow: auto;">
+                    {% for category in custom_categories %}
+                      <div class="checkbox">
+                        <label id="product-category{{ category.category_id }}">
+                          <i class="fa fa-minus-circle"></i> {{ category.name }}
+                          <input type="checkbox" class="hidden" name="module_ocn_category_wall_pro_categories_custom[]" value="{{ category.category_id }}" checked="checked">
+                        </label>
+                      </div>
+                    {% endfor %}
+                  </div>
+                  <i class="text-info" data-text="{{ help_categories_selected }}" data-count="true"></i>
+                  {% if error_categories_custom_minimum %}
+                    <div class="text-danger">{{ error_categories_custom_minimum }}</div>
                   {% endif %}
                 </div>
               </div>
@@ -243,30 +269,88 @@ $(window).on('load', function () {
   countCategories()
 
   $('#input-categories-type').on('change', checkType);
-  $('#form-group-categories input').on('change', countCategories);
+  $('#form-group-categories-selected input').on('change', countCategories);
+  $('#form-group-categories-custom input').on('change', countCategories);
 
   function checkType() {
-    if ($('#input-categories-type').val() == 'selected' && !$('#form-group-categories').hasClass('required')) {
-      $('#form-group-categories').addClass('required')
-      $('#form-group-categories-type i.text-info').removeClass('hidden')
+    $('#form-group-categories-selected').removeClass('required');
+    $('#form-group-categories-custom').removeClass('required');
+
+    if ($('#input-categories-type').val() == 'all') {
+      $('#form-group-categories-type i.text-info[data-type="all"]').removeClass('hidden');
     } else {
-      $('#form-group-categories').removeClass('required')
-      $('#form-group-categories-type i.text-info').addClass('hidden')
+      $('#form-group-categories-type i.text-info[data-type="all"]').addClass('hidden');
     }
-    countCategories()
+
+    if ($('#input-categories-type').val() == 'selected') {
+      $('#form-group-categories-selected').addClass('required');
+      $('#form-group-categories-type i.text-info[data-type="selected"]').removeClass('hidden');
+    } else {
+      $('#form-group-categories-type i.text-info[data-type="selected"]').addClass('hidden');
+    }
+
+    if ($('#input-categories-type').val() == 'custom') {
+      $('#form-group-categories-custom').addClass('required');
+      $('#form-group-categories-type i.text-info[data-type="custom"]').removeClass('hidden');
+    } else {
+      $('#form-group-categories-type i.text-info[data-type="custom"]').addClass('hidden');
+    }
+
+    countCategories();
   }
 
   function countCategories() {
-    let counter = $('#form-group-categories input:checked').length;
-    let text = $('#form-group-categories i.text-info').attr('data-text') + counter;
-    $('#form-group-categories i[data-count=true]').text(text);
+    let counterSelected = $('#form-group-categories-selected input:checked').length;
+    let counterCustom = $('#form-group-categories-custom input:checked').length;
+    let textSelected = $('#form-group-categories-selected i.text-info').attr('data-text') + counterSelected;
+    let textCustom = $('#form-group-categories-custom i.text-info').attr('data-text') + counterCustom;
+    $('#form-group-categories-selected i[data-count=true]').text(textSelected);
+    $('#form-group-categories-custom i[data-count=true]').text(textCustom);
 
-    if (counter < 1 && $('#input-categories-type').val() == 'selected') {
-      $('#form-group-categories i[data-count=true]').addClass('text-danger');
+    if (counterSelected < 1 && $('#input-categories-type').val() == 'selected') {
+      $('#form-group-categories-selected i[data-count=true]').addClass('text-danger');
     } else {
-      $('#form-group-categories i[data-count=true]').removeClass('text-danger');
+      $('#form-group-categories-selected i[data-count=true]').removeClass('text-danger');
+      $('#form-group-categories-selected div.text-danger').remove();
+      $('#form-group-categories-selected').removeClass('has-error');
+    }
+    if (counterCustom < 1 && $('#input-categories-type').val() == 'custom') {
+      $('#form-group-categories-custom i[data-count=true]').addClass('text-danger');
+    } else {
+      $('#form-group-categories-custom i[data-count=true]').removeClass('text-danger');
+      $('#form-group-categories-custom div.text-danger').remove();
+      $('#form-group-categories-custom').removeClass('has-error');
     }
   }
+
+  // Category
+  $('input[name="category"]').autocomplete({
+    'source': function(request, response) {
+      $.ajax({
+        url: 'index.php?route=catalog/category/autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
+        dataType: 'json',
+        success: function(json) {
+          response($.map(json, function(item) {
+            return {
+              label: item['name'],
+              value: item['category_id']
+            }
+          }));
+        }
+      });
+    },
+    'select': function(item) {
+      $('#form-group-categories-custom-input').val('');
+      $('#product-category' + item['value']).parent().remove();
+      $('#product-category').append('<div class="checkbox"><label id="product-category' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="checkbox" name="module_ocn_category_wall_pro_categories_custom[]" value="' + item['value'] + '" class="hidden" checked="checked"></label></div>');
+      countCategories();
+    }
+  });
+
+  $('#product-category').delegate('.fa-minus-circle', 'click', function() {
+    $(this).parent().parent().remove();
+    countCategories();
+  });
 });
 </script>
 {{ footer }}

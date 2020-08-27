@@ -3,10 +3,10 @@
 $_['heading_title']                  = '[OCN] Category Wall Pro';
 
 // Data
-$_['data_version']                   = '3.0.2.0';
+$_['data_version']                   = '3.0.3.0';
 $_['data_author_name']               = 'Hkr';
 $_['data_author_link']               = 'https://forum.opencart.name/members/hkr.3/';
-$_['data_extension_link']            = 'https://forum.opencart.name/resources/50/';
+$_['data_extension_link']            = 'https://forum.opencart.name/resources/32/';
 
 // Button
 $_['button_apply']                   = 'Apply';
@@ -25,6 +25,7 @@ $_['text_version']                   = 'Extension version';
 $_['text_author']                    = 'Extension author';
 $_['text_category_type_all']         = 'All parent categories';
 $_['text_category_type_selected']    = 'Selected parent categories';
+$_['text_category_type_custom']      = 'Selected categories';
 
 // Entry
 $_['entry_status']                   = 'Status';
@@ -39,11 +40,16 @@ $_['entry_subcategory']              = 'Subcategories';
 $_['entry_collapse']                 = 'Collapsible';
 $_['entry_subcategory_limit']        = 'Subcategory Limit';
 $_['entry_category']                 = 'Categories';
+$_['entry_category_parent']          = 'Parent categories';
+$_['entry_category_custom']          = 'Custom categories';
 $_['entry_category_type']            = 'Type';
 
 // Help
-$_['help_categories_type']           = 'For the selected parent categories, you must select at least one category from the list below';
+$_['help_categories_type_all']       = 'All parent categories will be displayed';
+$_['help_categories_type_selected']  = 'For the selected parent categories, you must select at least one category from the Parent Categories list';
+$_['help_categories_type_custom']    = 'For custom categories, you must select at least one category from the Custom categories list';
 $_['help_categories_selected']       = 'Categories selected: ';
+$_['help_category']                  = '(Autocomplete)';
 
 // Placeholder
 $_['placeholder_limit_cancel']       = '0 to cancel the limit';

@@ -3,10 +3,10 @@
 $_['heading_title']                  = '[OCN] Стена Категорий Про';
 
 // Data
-$_['data_version']                   = '3.0.2.0';
+$_['data_version']                   = '3.0.3.0';
 $_['data_author_name']               = 'Hkr';
 $_['data_author_link']               = 'https://forum.opencart.name/members/hkr.3/';
-$_['data_extension_link']            = 'https://forum.opencart.name/resources/50/';
+$_['data_extension_link']            = 'https://forum.opencart.name/resources/32/';
 
 // Button
 $_['button_apply']                   = 'Применить';
@@ -25,6 +25,7 @@ $_['text_version']                   = 'Версия расширения';
 $_['text_author']                    = 'Автор расширения';
 $_['text_category_type_all']         = 'Все родительские категории';
 $_['text_category_type_selected']    = 'Выбранные родительские категории';
+$_['text_category_type_custom']      = 'Выбранные категории';
 
 // Entry
 $_['entry_status']                   = 'Статус';
@@ -39,11 +40,16 @@ $_['entry_subcategory']              = 'Подкатегории';
 $_['entry_collapse']                 = 'Сворачиваемые';
 $_['entry_subcategory_limit']        = 'Лимит подкатегорий';
 $_['entry_category']                 = 'Категории';
+$_['entry_category_parent']          = 'Родительские категории';
+$_['entry_category_custom']          = 'Кастомные категории';
 $_['entry_category_type']            = 'Тип';
 
 // Help
-$_['help_categories_type']           = 'Для выбранных родительских категорий необходимо выбрать хотя бы одну категорию из списка ниже';
+$_['help_categories_type_all']       = 'Будут выведены все родительские категории';
+$_['help_categories_type_selected']  = 'Для выбранных родительских категорий необходимо выбрать хотя бы одну категорию из списка Родительские категории';
+$_['help_categories_type_custom']    = 'Для кастомных категорий необходимо выбрать хотя бы одну категорию из списка Кастомные категории';
 $_['help_categories_selected']       = 'Категорий выбрано: ';
+$_['help_category']                  = '(Автодополнение)';
 
 // Placeholder
 $_['placeholder_limit_cancel']       = '0 для отмены лимита';
@@ -56,4 +62,4 @@ $_['error_width']                    = 'Ширина обязательна!';
 $_['error_height']                   = 'Высота обязательна!';
 $_['error_limit']                    = 'Лимит обязателен!';
 $_['error_length']                   = 'Длина обязательна!';
-$_['error_categories_selected']      = 'Необходимо выбрать как минимум одну категорию!';
+$_['error_categories_minimum']       = 'Необходимо выбрать как минимум одну категорию!';

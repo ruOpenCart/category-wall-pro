@@ -9,7 +9,6 @@
               <a href="{{ category.href }}" class="category-wall-panel-title-link">{{ category.name }}</a>
             </h4>
           </div>
-          {% if image_status or category.description %}
           <div class="panel-body category-wall-panel-body text-center">
             {% if image_status %}
             <a href="{{ category.href }}" class="thumbnail category-wall-panel-body-link">
@@ -20,7 +19,6 @@
               <p class="category-wall-panel-body-description">{{ category.description }}</p>
             {% endif %}
           </div>
-          {% endif %}
           {% if category.children %}
             <div class="panel-footer category-wall-panel-footer">
               {% if subcategory_collapse_status %}
@@ -29,13 +27,11 @@
                 </a>
                 <div class="collapse" id="collapseSubCategory{{ category.category_id }}">
               {% endif %}
-
               <div class="list-group category-wall-list-group">
                 {% for child in category.children %}
                   <a href="{{ child.href }}" class="list-group-item category-wall-list-group-item">{{ child.name }}</a>
                 {% endfor %}
               </div>
-
               {% if subcategory_collapse_status %}
                 </div>
               {% endif %}
@@ -71,12 +67,12 @@ $(document).ready(function() {
   function setEqualHeight(columns) {
     let block = 0;
     columns.each(function() {
-      height = $(this).height();
+      height = $(this).outerHeight();
       if(height > block) {
-          block = height;
+        block = height;
       }
     });
-    columns.height(block);
+    columns.css("min-height", block);
   }
 });
 </script>
