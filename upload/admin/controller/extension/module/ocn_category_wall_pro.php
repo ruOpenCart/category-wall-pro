@@ -2,30 +2,6 @@
 class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 	private $error = [];
 
-	public function index() {
-		$this->load->language('extension/module/ocn_category_wall_pro');
-
-		$this->document->setTitle($this->language->get('heading_title'));
-
-		$this->load->model('setting/setting');
-
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_setting_setting->editSetting('module_ocn_category_wall_pro', $this->request->post);
-
-			$this->session->data['success'] = $this->language->get('text_success');
-
-			// If button apply
-			if (isset($this->request->post['apply']) && $this->request->post['apply']) {
-				$this->response->redirect($this->url->link('extension/module/ocn_category_wall_pro', 'user_token=' . $this->session->data['user_token'], true));
-			}
-
-			// Go to list modules
-			$this->response->redirect($this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'], true));
-		}
-
-		$this->getForm();
-	}
-
 	public function install() {
 		$this->load->model('setting/setting');
 
@@ -55,6 +31,30 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 		}
 
 		$this->model_setting_setting->editSetting('module_ocn_category_wall_pro', $data);
+	}
+
+	public function index() {
+		$this->load->language('extension/module/ocn_category_wall_pro');
+
+		$this->document->setTitle($this->language->get('heading_title'));
+
+		$this->load->model('setting/setting');
+
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+			$this->model_setting_setting->editSetting('module_ocn_category_wall_pro', $this->request->post);
+
+			$this->session->data['success'] = $this->language->get('text_success');
+
+			// If button apply
+			if (isset($this->request->post['apply']) && $this->request->post['apply']) {
+				$this->response->redirect($this->url->link('extension/module/ocn_category_wall_pro', 'user_token=' . $this->session->data['user_token'], true));
+			}
+
+			// Go to list modules
+			$this->response->redirect($this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'], true));
+		}
+
+		$this->getForm();
 	}
 
 	protected function getForm() {
