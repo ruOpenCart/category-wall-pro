@@ -1,6 +1,7 @@
 <?php
 class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
-	private $error = [];
+	private $errors = [];
+	private $warning;
 
 	public function install() {
 		$this->load->model('setting/setting');
@@ -60,22 +61,19 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 	protected function getForm() {
 		$data['user_token'] = $this->session->data['user_token'];
 
-		//Errors
+		// Success
 		if (isset($this->session->data['success'])) {
 			$data['success'] = $this->session->data['success'];
 			unset($this->session->data['success']);
 		} else {
 			$data['success'] = '';
 		}
-		$data['error_warning'] = isset($this->error['warning']) ? $this->error['warning'] : [];
-		$data['error_title'] = isset($this->error['title']) ? $this->error['title'] : [];
-		$data['error_width'] = isset($this->error['width']) ? $this->error['width'] : [];
-		$data['error_height'] = isset($this->error['height']) ? $this->error['height'] : [];
-		$data['error_limit'] = isset($this->error['limit']) ? $this->error['limit'] : [];
-		$data['error_length'] = isset($this->error['length']) ? $this->error['length'] : [];
-		$data['error_categories_selected_minimum'] = isset($this->error['categories_selected_minimum']) ? $this->error['categories_selected_minimum'] : [];
-		$data['error_categories_custom_minimum'] = isset($this->error['categories_custom_minimum']) ? $this->error['categories_custom_minimum'] : [];
 
+		// Errors
+		$data['errors'] = $this->errors;
+		$data['warning'] = $this->warning;
+
+		// @todo собрать в один
 		// Breadcrumbs
 		$data['breadcrumbs'] = [];
 		$data['breadcrumbs'][] = [
@@ -109,14 +107,14 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 		}
 		if (isset($this->request->post['module_ocn_category_wall_pro_categories_selected'])) {
 			$data['module_ocn_category_wall_pro_categories_selected'] = $this->request->post['module_ocn_category_wall_pro_categories_selected'];
-		} elseif (isset($this->error['categories_selected_minimum'])) {
+		} elseif (isset($this->errors['categories_selected_minimum'])) {
 			$data['module_ocn_category_wall_pro_categories_selected'] = [];
 		} else {
 			$data['module_ocn_category_wall_pro_categories_selected'] = $this->config->get('module_ocn_category_wall_pro_categories_selected');
 		}
 		if (isset($this->request->post['module_ocn_category_wall_pro_categories_custom'])) {
 			$data['module_ocn_category_wall_pro_categories_custom'] = $this->request->post['module_ocn_category_wall_pro_categories_custom'];
-		} elseif (isset($this->error['categories_custom_minimum'])) {
+		} elseif (isset($this->errors['categories_custom_minimum'])) {
 			$data['module_ocn_category_wall_pro_categories_custom'] = [];
 		} else {
 			$data['module_ocn_category_wall_pro_categories_custom'] = $this->config->get('module_ocn_category_wall_pro_categories_custom');
@@ -175,7 +173,7 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 
 	protected function validateForm() {
 		if (!$this->user->hasPermission('modify', 'extension/module/ocn_category_wall_pro')) {
-			$this->error['warning'] = $this->language->get('error_permission');
+			$this->errors['permission'] = $this->language->get('error_permission');
 		}
 
 		$this->load->model('localisation/language');
@@ -184,38 +182,38 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 		foreach ($data['languages'] as $language) {
 			$title = 'module_ocn_category_wall_pro_title--' . $language['language_id'];
 			if ((utf8_strlen($this->request->post[$title]) < 1) || (utf8_strlen($this->request->post[$title]) > 255)) {
-				$this->error['title'][$language['language_id']] = $this->language->get('error_title');
+				$this->errors['title'][$language['language_id']] = '[' . $language['code'] . '] ' . $this->language->get('error_title');
 			}
 		}
 
 		if (!$this->request->post['module_ocn_category_wall_pro_image_width']) {
-			$this->error['width'] = $this->language->get('error_width');
+			$this->errors['width'] = $this->language->get('error_width');
 		}
 
 		if (!$this->request->post['module_ocn_category_wall_pro_image_height']) {
-			$this->error['height'] = $this->language->get('error_height');
+			$this->errors['height'] = $this->language->get('error_height');
 		}
 
 		if (!$this->request->post['module_ocn_category_wall_pro_subcategory_limit'] && $this->request->post['module_ocn_category_wall_pro_subcategory_limit'] == '') {
-			$this->error['limit'] = $this->language->get('error_limit');
+			$this->errors['limit'] = $this->language->get('error_limit');
 		}
 
 		if (!$this->request->post['module_ocn_category_wall_pro_description_length'] && $this->request->post['module_ocn_category_wall_pro_description_length'] == '') {
-			$this->error['length'] = $this->language->get('error_length');
+			$this->errors['length'] = $this->language->get('error_length');
 		}
 
 		if ($this->request->post['module_ocn_category_wall_pro_categories_type'] == 'selected' && (!isset($this->request->post['module_ocn_category_wall_pro_categories_selected']) || count($this->request->post['module_ocn_category_wall_pro_categories_selected']) < 1)) {
-			$this->error['categories_selected_minimum'] = $this->language->get('error_categories_minimum');
+			$this->errors['categories_selected_minimum'] = $this->language->get('error_categories_minimum');
 		}
 
 		if ($this->request->post['module_ocn_category_wall_pro_categories_type'] == 'custom' && (!isset($this->request->post['module_ocn_category_wall_pro_categories_custom']) || count($this->request->post['module_ocn_category_wall_pro_categories_custom']) < 1)) {
-			$this->error['categories_custom_minimum'] = $this->language->get('error_categories_minimum');
+			$this->errors['categories_custom_minimum'] = $this->language->get('error_categories_minimum');
 		}
 
-		if ($this->error && !isset($this->error['warning'])) {
-			$this->error['warning'] = $this->language->get('error_warning');
+		if (count($this->errors) > 0) {
+			$this->warning = $this->language->get('error_warning');
 		}
 
-		return !$this->error;
+		return !$this->errors;
 	}
 }

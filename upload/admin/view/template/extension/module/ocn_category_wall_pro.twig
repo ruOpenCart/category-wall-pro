@@ -20,34 +20,21 @@
         <button type="button" class="close" data-dismiss="alert">&times;</button>
       </div>
     {% endif %}
-    {% if error_warning %}
+    {% if warning %}
     <div class="alert alert-danger alert-dismissible">
-      <i class="fa fa-exclamation-circle"></i> {{ error_warning }} <button type="button" class="close" data-dismiss="alert">&times;</button>
-      {% if error_title or error_width or error_height or error_length or error_limit or error_categories_selected_minimum or error_categories_custom_minimum %}
+      <i class="fa fa-exclamation-circle"></i> {{ warning }} <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {% if errors %}
+        <hr>
         <ul>
-          {% if error_title %}
-            {% for title in error_title %}
-              <li class="text-muted">{{ title }}</li>
-            {% endfor %}
-          {% endif %}
-          {% if error_width %}
-            <li class="text-muted">{{ error_width }}</li>
-          {% endif %}
-          {% if error_height %}
-            <li class="text-muted">{{ error_height }}</li>
-          {% endif %}
-          {% if error_length %}
-            <li class="text-muted">{{ error_length }}</li>
-          {% endif %}
-          {% if error_limit %}
-            <li class="text-muted">{{ error_limit }}</li>
-          {% endif %}
-          {% if error_categories_selected_minimum %}
-            <li class="text-muted">{{ error_categories_selected_minimum }}</li>
-          {% endif %}
-          {% if error_categories_custom_minimum %}
-            <li class="text-muted">{{ error_categories_custom_minimum }}</li>
-          {% endif %}
+          {% for key, error in errors %}
+            {% if key == 'title' %}
+              {% for title in error %}
+                <li class="text-muted">{{ title }}</li>
+              {% endfor %}
+            {% else %}
+              <li class="text-muted">{{ error }}</li>
+            {% endif %}
+          {% endfor %}
         </ul>
       {% endif %}
     </div>
@@ -78,8 +65,8 @@
                     <label class="col-sm-2 control-label" for="input-title--{{ language.language_id }}">{{ entry_title }}</label>
                     <div class="col-sm-10">
                       <input type="text" name="module_ocn_category_wall_pro_title--{{ language.language_id }}" value="{{ module_ocn_category_wall_pro_title[language.language_id] }}" placeholder="{{ entry_title }}" id="input-title--{{ language.language_id }}" class="form-control">
-                      {% if error_title[language.language_id] %}
-                        <div class="text-danger">{{ error_title[language.language_id] }}</div>
+                      {% if errors.title[language.language_id] %}
+                        <div class="text-danger">{{ errors.title[language.language_id] }}</div>
                       {% endif %}
                     </div>
                   </div>
@@ -120,8 +107,8 @@
                 <label class="col-sm-2 control-label" for="input-image-width">{{ entry_image_width }}</label>
                 <div class="col-sm-10">
                   <input type="text" name="module_ocn_category_wall_pro_image_width" value="{{ module_ocn_category_wall_pro_image_width }}" placeholder="220" id="input-image-width" class="form-control">
-                  {% if error_width %}
-                    <div class="text-danger">{{ error_width }}</div>
+                  {% if errors.width %}
+                    <div class="text-danger">{{ errors.width }}</div>
                   {% endif %}
                 </div>
               </div>
@@ -129,8 +116,8 @@
                 <label class="col-sm-2 control-label" for="input-image-height">{{ entry_image_height }}</label>
                 <div class="col-sm-10">
                   <input type="text" name="module_ocn_category_wall_pro_image_height" value="{{ module_ocn_category_wall_pro_image_height }}" placeholder="220" id="input-image-height" class="form-control">
-                  {% if error_height %}
-                    <div class="text-danger">{{ error_height }}</div>
+                  {% if errors.height %}
+                    <div class="text-danger">{{ errors.height }}</div>
                   {% endif %}
                 </div>
               </div>
@@ -147,8 +134,8 @@
                 <label class="col-sm-2 control-label" for="input-description-length">{{ entry_description_length }}</label>
                 <div class="col-sm-10">
                   <input type="text" name="module_ocn_category_wall_pro_description_length" value="{{ module_ocn_category_wall_pro_description_length }}" placeholder="{{ placeholder_limit_cancel }}" id="input-description-length" class="form-control">
-                  {% if error_length %}
-                    <div class="text-danger">{{ error_length }}</div>
+                  {% if errors.length %}
+                    <div class="text-danger">{{ errors.length }}</div>
                   {% endif %}
                 </div>
               </div>
@@ -179,8 +166,8 @@
                     {% endfor %}
                   </div>
                   <i class="text-info" data-text="{{ help_categories_selected }}" data-count="true"></i>
-                  {% if error_categories_selected_minimum %}
-                    <div class="text-danger">{{ error_categories_selected_minimum }}</div>
+                  {% if errors.categories_selected_minimum %}
+                    <div class="text-danger">{{ errors.categories_selected_minimum }}</div>
                   {% endif %}
                 </div>
               </div>
@@ -199,8 +186,8 @@
                     {% endfor %}
                   </div>
                   <i class="text-info" data-text="{{ help_categories_selected }}" data-count="true"></i>
-                  {% if error_categories_custom_minimum %}
-                    <div class="text-danger">{{ error_categories_custom_minimum }}</div>
+                  {% if errors.categories_custom_minimum %}
+                    <div class="text-danger">{{ errors.categories_custom_minimum }}</div>
                   {% endif %}
                 </div>
               </div>
@@ -219,8 +206,8 @@
                 <label class="col-sm-2 control-label" for="input-subcategory-limit">{{ entry_subcategory_limit }}</label>
                 <div class="col-sm-10">
                   <input type="text" name="module_ocn_category_wall_pro_subcategory_limit" value="{{ module_ocn_category_wall_pro_subcategory_limit }}" placeholder="{{ placeholder_limit_cancel }}" id="input-subcategory-limit" class="form-control">
-                  {% if error_limit %}
-                    <div class="text-danger">{{ error_limit }}</div>
+                  {% if errors.limit %}
+                    <div class="text-danger">{{ errors.limit }}</div>
                   {% endif %}
                 </div>
               </div>
