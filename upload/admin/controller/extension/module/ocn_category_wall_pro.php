@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/module/ocn_category_wall_pro');
@@ -16,11 +16,11 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 
 			// If button apply
 			if (isset($this->request->post['apply']) && $this->request->post['apply']) {
-				$this->response->redirect($this->url->link('extension/module/ocn_category_wall_pro', 'user_token=' . $this->session->data['user_token'] . '&type=module', true));
+				$this->response->redirect($this->url->link('extension/module/ocn_category_wall_pro', 'user_token=' . $this->session->data['user_token'], true));
 			}
 
 			// Go to list modules
-			$this->response->redirect($this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true));
+			$this->response->redirect($this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'], true));
 		}
 
 		$this->getForm();
@@ -61,79 +61,35 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 		$data['user_token'] = $this->session->data['user_token'];
 
 		//Errors
-		if (isset($this->error['warning'])) {
-			$data['error_warning'] = $this->error['warning'];
-		} else {
-			$data['error_warning'] = '';
-		}
-
 		if (isset($this->session->data['success'])) {
 			$data['success'] = $this->session->data['success'];
-
 			unset($this->session->data['success']);
 		} else {
 			$data['success'] = '';
 		}
-
-		if (isset($this->error['title'])) {
-			$data['error_title'] = $this->error['title'];
-		} else {
-			$data['error_title'] = array();
-		}
-
-		if (isset($this->error['width'])) {
-			$data['error_width'] = $this->error['width'];
-		} else {
-			$data['error_width'] = array();
-		}
-
-		if (isset($this->error['height'])) {
-			$data['error_height'] = $this->error['height'];
-		} else {
-			$data['error_height'] = array();
-		}
-
-		if (isset($this->error['limit'])) {
-			$data['error_limit'] = $this->error['limit'];
-		} else {
-			$data['error_limit'] = array();
-		}
-
-		if (isset($this->error['length'])) {
-			$data['error_length'] = $this->error['length'];
-		} else {
-			$data['error_length'] = array();
-		}
-
-		if (isset($this->error['categories_selected_minimum'])) {
-			$data['error_categories_selected_minimum'] = $this->error['categories_selected_minimum'];
-		} else {
-			$data['error_categories_selected_minimum'] = array();
-		}
-
-		if (isset($this->error['categories_custom_minimum'])) {
-			$data['error_categories_custom_minimum'] = $this->error['categories_custom_minimum'];
-		} else {
-			$data['error_categories_custom_minimum'] = array();
-		}
+		$data['error_warning'] = isset($this->error['warning']) ? $this->error['warning'] : [];
+		$data['error_title'] = isset($this->error['title']) ? $this->error['title'] : [];
+		$data['error_width'] = isset($this->error['width']) ? $this->error['width'] : [];
+		$data['error_height'] = isset($this->error['height']) ? $this->error['height'] : [];
+		$data['error_limit'] = isset($this->error['limit']) ? $this->error['limit'] : [];
+		$data['error_length'] = isset($this->error['length']) ? $this->error['length'] : [];
+		$data['error_categories_selected_minimum'] = isset($this->error['categories_selected_minimum']) ? $this->error['categories_selected_minimum'] : [];
+		$data['error_categories_custom_minimum'] = isset($this->error['categories_custom_minimum']) ? $this->error['categories_custom_minimum'] : [];
 
 		// Breadcrumbs
-		$data['breadcrumbs'] = array();
-
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'user_token=' . $this->session->data['user_token'], true)
-		);
-
-		$data['breadcrumbs'][] = array(
+		];
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_extension'),
 			'href' => $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true)
-		);
-
-		$data['breadcrumbs'][] = array(
+		];
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/module/ocn_category_wall_pro', 'user_token=' . $this->session->data['user_token'], true)
-		);
+		];
 
 		// Buttons
 		$data['action'] = $this->url->link('extension/module/ocn_category_wall_pro', 'user_token=' . $this->session->data['user_token'], true);
@@ -222,7 +178,7 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 		if (isset($this->request->post['module_ocn_category_wall_pro_categories_selected'])) {
 			$data['module_ocn_category_wall_pro_categories_selected'] = $this->request->post['module_ocn_category_wall_pro_categories_selected'];
 		} elseif (isset($this->error['categories_selected_minimum'])) {
-			$data['module_ocn_category_wall_pro_categories_selected'] = array();
+			$data['module_ocn_category_wall_pro_categories_selected'] = [];
 		} else {
 			$data['module_ocn_category_wall_pro_categories_selected'] = $this->config->get('module_ocn_category_wall_pro_categories_selected');
 		}
@@ -230,7 +186,7 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 		if (isset($this->request->post['module_ocn_category_wall_pro_categories_custom'])) {
 			$data['module_ocn_category_wall_pro_categories_custom'] = $this->request->post['module_ocn_category_wall_pro_categories_custom'];
 		} elseif (isset($this->error['categories_custom_minimum'])) {
-			$data['module_ocn_category_wall_pro_categories_custom'] = array();
+			$data['module_ocn_category_wall_pro_categories_custom'] = [];
 		} else {
 			$data['module_ocn_category_wall_pro_categories_custom'] = $this->config->get('module_ocn_category_wall_pro_categories_custom');
 		}
