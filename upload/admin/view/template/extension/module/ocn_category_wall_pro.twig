@@ -5,7 +5,7 @@
       <div class="pull-right">
         <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_apply }}" class="btn btn-success" name="apply" value="1"><i class="fa fa-save"></i></button>
         <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
-        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+        <a href="{{ url_cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
       <h1>{{ heading_title }}</h1>
       <ul class="breadcrumb">
         {% for breadcrumb in breadcrumbs %}
@@ -57,7 +57,7 @@
         <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
       </div>
       <div class="panel-body">
-        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+        <form action="{{ url_action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
           <ul class="nav nav-tabs">
             <li class="active"><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
             <li><a href="#tab-category" data-toggle="tab">{{ tab_category }}</a></li>
@@ -128,7 +128,7 @@
               <div class="form-group required">
                 <label class="col-sm-2 control-label" for="input-image-height">{{ entry_image_height }}</label>
                 <div class="col-sm-10">
-                  <input type="text" name="module_ocn_category_wall_pro_image_height" value="{{ module_ocn_category_wall_pro_image_height }}" placeholder="80" id="input-image-height" class="form-control">
+                  <input type="text" name="module_ocn_category_wall_pro_image_height" value="{{ module_ocn_category_wall_pro_image_height }}" placeholder="220" id="input-image-height" class="form-control">
                   {% if error_height %}
                     <div class="text-danger">{{ error_height }}</div>
                   {% endif %}
@@ -187,7 +187,7 @@
               <div class="form-group"  id="form-group-categories-custom">
                 <label class="col-sm-2 control-label" for="form-group-categories-input"><span data-toggle="tooltip" title="{{ help_category }}">{{ entry_category_custom }}</span></label>
                 <div class="col-sm-10">
-                  <input type="text" name="category" value="" placeholder="{{ entry_category }}" id="form-group-categories-input" class="form-control"/>
+                  <input type="text" placeholder="{{ entry_category }}" id="form-group-categories-input" class="form-control"/>
                   <div id="product-category" class="well well-sm" style="height: 150px; overflow: auto;">
                     {% for category in custom_categories %}
                       <div class="checkbox">
@@ -324,7 +324,7 @@ $(window).on('load', function () {
   }
 
   // Category
-  $('input[name="category"]').autocomplete({
+  $('input#form-group-categories-input').autocomplete({
     'source': function(request, response) {
       $.ajax({
         url: 'index.php?route=catalog/category/autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),

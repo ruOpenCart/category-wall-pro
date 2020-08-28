@@ -10,7 +10,7 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 			'module_ocn_category_wall_pro_height_status' => 1,
 			'module_ocn_category_wall_pro_image_status' => 1,
 			'module_ocn_category_wall_pro_image_width' => 220,
-			'module_ocn_category_wall_pro_image_height' => 80,
+			'module_ocn_category_wall_pro_image_height' => 220,
 			'module_ocn_category_wall_pro_subcategory_status' => 1,
 			'module_ocn_category_wall_pro_subcategory_limit' => 2,
 			'module_ocn_category_wall_pro_description_status' => 1,
@@ -92,8 +92,8 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 		];
 
 		// Buttons
-		$data['action'] = $this->url->link('extension/module/ocn_category_wall_pro', 'user_token=' . $this->session->data['user_token'], true);
-		$data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true);
+		$data['url_action'] = $this->url->link('extension/module/ocn_category_wall_pro', 'user_token=' . $this->session->data['user_token'], true);
+		$data['url_cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true);
 
 		// Data form
 		$this->load->model('localisation/language');
@@ -103,78 +103,10 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 			$title = 'module_ocn_category_wall_pro_title--' . $language['language_id'];
 			if (isset($this->request->post[$title])) {
 				$data['module_ocn_category_wall_pro_title'][$language['language_id']] = $this->request->post[$title];
-			} elseif ($this->request->server['REQUEST_METHOD'] != 'POST') {
-				$data['module_ocn_category_wall_pro_title'][$language['language_id']] = $this->config->get($title);
 			} else {
-				$data['module_ocn_category_wall_pro_title'][$language['language_id']] = '';
+				$data['module_ocn_category_wall_pro_title'][$language['language_id']] = $this->config->get($title);
 			}
 		}
-
-		if (isset($this->request->post['module_ocn_category_wall_pro_status'])) {
-			$data['module_ocn_category_wall_pro_status'] = $this->request->post['module_ocn_category_wall_pro_status'];
-		} else {
-			$data['module_ocn_category_wall_pro_status'] = $this->config->get('module_ocn_category_wall_pro_status');
-		}
-		if (isset($this->request->post['module_ocn_category_wall_pro_height_status'])) {
-			$data['module_ocn_category_wall_pro_height_status'] = $this->request->post['module_ocn_category_wall_pro_height_status'];
-		} else {
-			$data['module_ocn_category_wall_pro_height_status'] = $this->config->get('module_ocn_category_wall_pro_height_status');
-		}
-
-		if (isset($this->request->post['module_ocn_category_wall_pro_image_status'])) {
-			$data['module_ocn_category_wall_pro_image_status'] = $this->request->post['module_ocn_category_wall_pro_image_status'];
-		} else {
-			$data['module_ocn_category_wall_pro_image_status'] = $this->config->get('module_ocn_category_wall_pro_image_status');
-		}
-
-		if (isset($this->request->post['module_ocn_category_wall_pro_image_width'])) {
-			$data['module_ocn_category_wall_pro_image_width'] = $this->request->post['module_ocn_category_wall_pro_image_width'];
-		} else {
-			$data['module_ocn_category_wall_pro_image_width'] = $this->config->get('module_ocn_category_wall_pro_image_width');
-		}
-
-		if (isset($this->request->post['module_ocn_category_wall_pro_image_height'])) {
-			$data['module_ocn_category_wall_pro_image_height'] = $this->request->post['module_ocn_category_wall_pro_image_height'];
-		} else {
-			$data['module_ocn_category_wall_pro_image_height'] = $this->config->get('module_ocn_category_wall_pro_image_height');
-		}
-
-		if (isset($this->request->post['module_ocn_category_wall_pro_subcategory_status'])) {
-			$data['module_ocn_category_wall_pro_subcategory_status'] = $this->request->post['module_ocn_category_wall_pro_subcategory_status'];
-		} else {
-			$data['module_ocn_category_wall_pro_subcategory_status'] = $this->config->get('module_ocn_category_wall_pro_subcategory_status');
-		}
-
-		if (isset($this->request->post['module_ocn_category_wall_pro_subcategory_limit'])) {
-			$data['module_ocn_category_wall_pro_subcategory_limit'] = $this->request->post['module_ocn_category_wall_pro_subcategory_limit'];
-		} else {
-			$data['module_ocn_category_wall_pro_subcategory_limit'] = $this->config->get('module_ocn_category_wall_pro_subcategory_limit');
-		}
-
-		if (isset($this->request->post['module_ocn_category_wall_pro_subcategory_collapse_status'])) {
-			$data['module_ocn_category_wall_pro_subcategory_collapse_status'] = $this->request->post['module_ocn_category_wall_pro_subcategory_collapse_status'];
-		} else {
-			$data['module_ocn_category_wall_pro_subcategory_collapse_status'] = $this->config->get('module_ocn_category_wall_pro_subcategory_collapse_status');
-		}
-
-		if (isset($this->request->post['module_ocn_category_wall_pro_description_status'])) {
-			$data['module_ocn_category_wall_pro_description_status'] = $this->request->post['module_ocn_category_wall_pro_description_status'];
-		} else {
-			$data['module_ocn_category_wall_pro_description_status'] = $this->config->get('module_ocn_category_wall_pro_description_status');
-		}
-
-		if (isset($this->request->post['module_ocn_category_wall_pro_description_length'])) {
-			$data['module_ocn_category_wall_pro_description_length'] = $this->request->post['module_ocn_category_wall_pro_description_length'];
-		} else {
-			$data['module_ocn_category_wall_pro_description_length'] = $this->config->get('module_ocn_category_wall_pro_description_length');
-		}
-
-		if (isset($this->request->post['module_ocn_category_wall_pro_categories_type'])) {
-			$data['module_ocn_category_wall_pro_categories_type'] = $this->request->post['module_ocn_category_wall_pro_categories_type'];
-		} else {
-			$data['module_ocn_category_wall_pro_categories_type'] = $this->config->get('module_ocn_category_wall_pro_categories_type');
-		}
-
 		if (isset($this->request->post['module_ocn_category_wall_pro_categories_selected'])) {
 			$data['module_ocn_category_wall_pro_categories_selected'] = $this->request->post['module_ocn_category_wall_pro_categories_selected'];
 		} elseif (isset($this->error['categories_selected_minimum'])) {
@@ -182,7 +114,6 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 		} else {
 			$data['module_ocn_category_wall_pro_categories_selected'] = $this->config->get('module_ocn_category_wall_pro_categories_selected');
 		}
-
 		if (isset($this->request->post['module_ocn_category_wall_pro_categories_custom'])) {
 			$data['module_ocn_category_wall_pro_categories_custom'] = $this->request->post['module_ocn_category_wall_pro_categories_custom'];
 		} elseif (isset($this->error['categories_custom_minimum'])) {
@@ -190,14 +121,49 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 		} else {
 			$data['module_ocn_category_wall_pro_categories_custom'] = $this->config->get('module_ocn_category_wall_pro_categories_custom');
 		}
+		$data['module_ocn_category_wall_pro_status'] = isset($this->request->post['module_ocn_category_wall_pro_status'])
+			? $this->request->post['module_ocn_category_wall_pro_status']
+			: $this->config->get('module_ocn_category_wall_pro_status');
+		$data['module_ocn_category_wall_pro_height_status'] = isset($this->request->post['module_ocn_category_wall_pro_height_status'])
+			? $this->request->post['module_ocn_category_wall_pro_height_status']
+			: $this->config->get('module_ocn_category_wall_pro_height_status');
+		$data['module_ocn_category_wall_pro_image_status'] = isset($this->request->post['module_ocn_category_wall_pro_image_status'])
+			? $this->request->post['module_ocn_category_wall_pro_image_status']
+			: $this->config->get('module_ocn_category_wall_pro_image_status');
+		$data['module_ocn_category_wall_pro_image_width'] = isset($this->request->post['module_ocn_category_wall_pro_image_width'])
+			? $this->request->post['module_ocn_category_wall_pro_image_width']
+			: $this->config->get('module_ocn_category_wall_pro_image_width');
+		$data['module_ocn_category_wall_pro_image_height'] = isset($this->request->post['module_ocn_category_wall_pro_image_height'])
+			? $this->request->post['module_ocn_category_wall_pro_image_height']
+			: $this->config->get('module_ocn_category_wall_pro_image_height');
+		$data['module_ocn_category_wall_pro_subcategory_status'] = isset($this->request->post['module_ocn_category_wall_pro_subcategory_status'])
+			? $this->request->post['module_ocn_category_wall_pro_subcategory_status']
+			: $this->config->get('module_ocn_category_wall_pro_subcategory_status');
+		$data['module_ocn_category_wall_pro_subcategory_limit'] = isset($this->request->post['module_ocn_category_wall_pro_subcategory_limit'])
+			? $this->request->post['module_ocn_category_wall_pro_subcategory_limit']
+			: $this->config->get('module_ocn_category_wall_pro_subcategory_limit');
+		$data['module_ocn_category_wall_pro_subcategory_collapse_status'] = isset($this->request->post['module_ocn_category_wall_pro_subcategory_collapse_status'])
+			? $this->request->post['module_ocn_category_wall_pro_subcategory_collapse_status']
+			: $this->config->get('module_ocn_category_wall_pro_subcategory_collapse_status');
+		$data['module_ocn_category_wall_pro_description_status'] = isset($this->request->post['module_ocn_category_wall_pro_description_status'])
+			? $this->request->post['module_ocn_category_wall_pro_description_status']
+			: $this->config->get('module_ocn_category_wall_pro_description_status');
+		$data['module_ocn_category_wall_pro_description_length'] = isset($this->request->post['module_ocn_category_wall_pro_description_length'])
+			? $this->request->post['module_ocn_category_wall_pro_description_length']
+			: $this->config->get('module_ocn_category_wall_pro_description_length');
+		$data['module_ocn_category_wall_pro_categories_type'] = isset($this->request->post['module_ocn_category_wall_pro_categories_type'])
+			? $this->request->post['module_ocn_category_wall_pro_categories_type']
+			: $this->config->get('module_ocn_category_wall_pro_categories_type');
 
 		// Categories
 		$this->load->model('extension/module/ocn_category_wall_pro');
 		$data['parent_categories'] = $this->model_extension_module_ocn_category_wall_pro->getParentCategories();
 		$ids = $data['module_ocn_category_wall_pro_categories_custom']
-			? implode(",", $data['module_ocn_category_wall_pro_categories_custom'])
+			? implode(',', $data['module_ocn_category_wall_pro_categories_custom'])
 			: 0;
-		$data['custom_categories'] = $this->model_extension_module_ocn_category_wall_pro->getCategoriesByIds($ids);
+		$data['custom_categories'] = ($ids == 0)
+			? []
+			: $this->model_extension_module_ocn_category_wall_pro->getCategoriesByIds($ids);
 
 		// Templates
 		$data['header'] = $this->load->controller('common/header');
