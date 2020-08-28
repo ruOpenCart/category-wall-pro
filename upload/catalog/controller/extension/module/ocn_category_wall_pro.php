@@ -36,17 +36,17 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 
 		foreach ($categories as $category) {
 			// Level 2
-			$children_data = array();
+			$children_data = [];
 
 			if ($this->config->get('module_ocn_category_wall_pro_subcategory_status')) {
 				$children = $this->model_extension_module_ocn_category_wall_pro->getCategories($category['category_id'], $limit);
 
 				foreach ($children as $child) {
-					$children_data[] = array(
+					$children_data[] = [
 						'category_id' => $child['category_id'],
 						'name' => $child['name'],
 						'href' => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'])
-					);
+					];
 				}
 			}
 
@@ -68,14 +68,14 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 				}
 			}
 
-			$data['categories'][] = array(
+			$data['categories'][] = [
 				'category_id'     => $category['category_id'],
 				'name'            => $category['name'],
 				'image'           => $image,
 				'description'     => $description,
 				'children'        => $children_data,
 				'href'            => $this->url->link('product/category', 'path=' . $category['category_id'])
-			);
+			];
 		}
 
 		return $this->load->view('extension/module/ocn_category_wall_pro', $data);
