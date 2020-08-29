@@ -73,20 +73,20 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 		$data['errors'] = $this->errors;
 		$data['warning'] = $this->warning;
 
-		// @todo собрать в один
 		// Breadcrumbs
-		$data['breadcrumbs'] = [];
-		$data['breadcrumbs'][] = [
-			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/dashboard', 'user_token=' . $this->session->data['user_token'], true)
-		];
-		$data['breadcrumbs'][] = [
-			'text' => $this->language->get('text_extension'),
-			'href' => $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true)
-		];
-		$data['breadcrumbs'][] = [
-			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('extension/module/ocn_category_wall_pro', 'user_token=' . $this->session->data['user_token'], true)
+		$data['breadcrumbs'] = [
+			[
+				'text' => $this->language->get('text_home'),
+				'href' => $this->url->link('common/dashboard', 'user_token=' . $this->session->data['user_token'], true)
+			],
+			[
+				'text' => $this->language->get('text_extension'),
+				'href' => $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true)
+			],
+			[
+				'text' => $this->language->get('heading_title'),
+				'href' => $this->url->link('extension/module/ocn_category_wall_pro', 'user_token=' . $this->session->data['user_token'], true)
+			]
 		];
 
 		// Buttons
