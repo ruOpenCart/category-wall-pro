@@ -3,13 +3,11 @@
 $_['heading_title']                  = '[OCN] Стена Категорий Про';
 
 // Data
-$_['data_version']                   = '3.0.3.2';
-$_['data_author_name']               = 'Hkr';
-$_['data_author_link']               = 'https://forum.opencart.name/members/hkr.3/';
-$_['data_extension_link']            = 'https://forum.opencart.name/resources/32/';
+$_['data_extension_name']            = '[OCN] Стена Категорий Про';
 
 // Button
 $_['button_apply']                   = 'Применить';
+$_['button_check_new']               = 'Проверить наличие новой версии';
 
 // Tab
 $_['tab_category']                   = 'Категории';
@@ -19,9 +17,12 @@ $_['tab_info']                       = 'Информация';
 // Text
 $_['text_extension']                 = 'Расширения';
 $_['text_success']                   = 'Успешно: Вы изменили модуль стена категорий!';
-$_['text_edit']                      = 'Редактировать модуль стена категорий';
-$_['text_name']                      = 'Наименование расширения';
-$_['text_version']                   = 'Версия расширения';
+$_['text_edit']                      = 'Редактировать';
+$_['text_repository_author']         = 'Владелец репозитория';
+$_['text_repository_name']           = 'Репозиторий';
+$_['text_extension_name']            = 'Наименование расширения';
+$_['text_version_current']           = 'Текущая версия расширения';
+$_['text_version_actual']            = 'Актуальная версия расширения';
 $_['text_author']                    = 'Автор расширения';
 $_['text_category_type_all']         = 'Все родительские категории';
 $_['text_category_type_selected']    = 'Выбранные родительские категории';

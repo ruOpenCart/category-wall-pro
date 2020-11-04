@@ -3,13 +3,11 @@
 $_['heading_title']                  = '[OCN] Category Wall Pro';
 
 // Data
-$_['data_version']                   = '3.0.3.2';
-$_['data_author_name']               = 'Hkr';
-$_['data_author_link']               = 'https://forum.opencart.name/members/hkr.3/';
-$_['data_extension_link']            = 'https://forum.opencart.name/resources/32/';
+$_['data_extension_name']            = '[OCN] Category Wall Pro';
 
 // Button
 $_['button_apply']                   = 'Apply';
+$_['button_check_new']               = 'Check for new version';
 
 // Tab
 $_['tab_category']                   = 'Categories';
@@ -19,9 +17,12 @@ $_['tab_info']                       = 'Info';
 // Text
 $_['text_extension']                 = 'Extensions';
 $_['text_success']                   = 'Success: You have modified category wall module!';
-$_['text_edit']                      = 'Edit Category Wall Module';
-$_['text_name']                      = 'Extension name';
-$_['text_version']                   = 'Extension version';
+$_['text_edit']                      = 'Edit';
+$_['text_repository_author']         = 'Repository owner';
+$_['text_repository_name']           = 'Repository';
+$_['text_extension_name']            = 'Extension name';
+$_['text_version_current']           = 'Current extension version';
+$_['text_version_actual']            = 'Actual extension version';
 $_['text_author']                    = 'Extension author';
 $_['text_category_type_all']         = 'All parent categories';
 $_['text_category_type_selected']    = 'Selected parent categories';

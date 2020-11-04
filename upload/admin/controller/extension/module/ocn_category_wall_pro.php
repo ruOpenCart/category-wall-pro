@@ -1,5 +1,15 @@
 <?php
 class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
+	private $extension_version = '3.0.3.3';
+	private $author = 'Hkr';
+	private $author_repository = 'Hkr32';
+	private $repository = 'GitHub';
+	private $support_author = 'https://forum.opencart.name/members/hkr.3/';
+	private $support_extension = 'https://forum.opencart.name/resources/32/';
+	private $repository_author = 'https://github.com/Hkr32';
+	private $repository_extension = 'https://github.com/ruOpenCart/category-wall-pro';
+	private $url_extension_update = 'https://api.github.com/repos/ruOpenCart/category-wall-pro/releases/latest';
+
 	private $error = [];
 
 	public function install() {
@@ -58,6 +68,16 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 	}
 
 	protected function getForm() {
+		$data['data_current_version'] = $this->extension_version;
+		$data['data_author'] = $this->author;
+		$data['data_author_repository'] = $this->author_repository;
+		$data['data_repository'] = $this->repository;
+		$data['data_support_author'] = $this->support_author;
+		$data['data_support_extension'] = $this->support_extension;
+		$data['data_repository_author'] = $this->repository_author;
+		$data['data_repository_extension'] = $this->repository_extension;
+		$data['url_extension_update'] = $this->url_extension_update;
+
 		$data['user_token'] = $this->session->data['user_token'];
 
 		//Errors
