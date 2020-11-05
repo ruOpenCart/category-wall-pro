@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
-	private $extension_version = '3.0.3.3';
+	private $extension_version = '3.0.3.4';
 	private $author = 'Hkr';
 	private $author_repository = 'Hkr32';
 	private $repository = 'GitHub';
