@@ -178,10 +178,8 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 		// Categories
 		$this->load->model('extension/module/ocn_category_wall_pro');
 		$data['parent_categories'] = $this->model_extension_module_ocn_category_wall_pro->getParentCategories();
-		$ids = $data['module_ocn_category_wall_pro_categories_custom']
-			? implode(',', $data['module_ocn_category_wall_pro_categories_custom'])
-			: 0;
-		$data['custom_categories'] = ($ids == 0)
+		$ids = $data['module_ocn_category_wall_pro_categories_custom'] ?: [];
+		$data['custom_categories'] = count($ids) < 1
 			? []
 			: $this->model_extension_module_ocn_category_wall_pro->getCategoriesByIds($ids);
 

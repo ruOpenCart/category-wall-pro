@@ -15,14 +15,16 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 		$length = $this->config->get('module_ocn_category_wall_pro_description_length');
 		$type = $this->config->get('module_ocn_category_wall_pro_categories_type');
 
+		$ids = $type == 'selected'
+			? $this->config->get('module_ocn_category_wall_pro_categories_selected')
+			: $this->config->get('module_ocn_category_wall_pro_categories_custom');
+		
 		$categories = [];
 		switch ($type) {
 			case 'selected':
-				$ids = implode(",", $this->config->get('module_ocn_category_wall_pro_categories_selected'));
 				$categories = $this->model_extension_module_ocn_category_wall_pro->getCategoriesByIds($ids);
 				break;
 			case 'custom':
-				$ids = implode(",", $this->config->get('module_ocn_category_wall_pro_categories_custom'));
 				$categories = $this->model_extension_module_ocn_category_wall_pro->getCategoriesByIds($ids);
 				break;
 			default:
