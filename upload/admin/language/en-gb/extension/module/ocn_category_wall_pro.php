@@ -44,6 +44,7 @@ $_['entry_category']                 = 'Categories';
 $_['entry_category_parent']          = 'Parent categories';
 $_['entry_category_custom']          = 'Custom categories';
 $_['entry_category_type']            = 'Type';
+$_['entry_name']        			 = 'Module name';
 
 // Help
 $_['help_categories_type_all']       = 'All parent categories will be displayed';
@@ -64,3 +65,4 @@ $_['error_height']                   = 'Height required!';
 $_['error_limit']                    = 'Limit required!';
 $_['error_length']                   = 'Length required!';
 $_['error_categories_selected']      = 'You must select at least one category!';
+$_['error_name']        			 = 'Module Name must be between 3 and 64 characters!';

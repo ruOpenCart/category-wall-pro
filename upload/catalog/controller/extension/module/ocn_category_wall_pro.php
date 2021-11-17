@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
-	public function index() {
+	public function index($setting) {
 		$this->load->language('extension/module/ocn_category_wall_pro');
 
 		$this->load->model('catalog/category');
@@ -8,16 +8,16 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 		$this->load->model('catalog/product');
 		$this->load->model('tool/image');
 
-		$data['title'] = $this->config->get('module_ocn_category_wall_pro_title--' . $this->config->get('config_language_id'));
+		$data['title'] = $setting['module_ocn_category_wall_pro_title'][$this->config->get('config_language_id')]['title'];
 
 		$category_id = 0;
-		$limit = $this->config->get('module_ocn_category_wall_pro_subcategory_limit');
-		$length = $this->config->get('module_ocn_category_wall_pro_description_length');
-		$type = $this->config->get('module_ocn_category_wall_pro_categories_type');
+		$limit = $setting['module_ocn_category_wall_pro_subcategory_limit'];
+		$length = $setting['module_ocn_category_wall_pro_description_length'];
+		$type = $setting['module_ocn_category_wall_pro_categories_type'];
 
-		$ids = $type == 'selected'
-			? $this->config->get('module_ocn_category_wall_pro_categories_selected')
-			: $this->config->get('module_ocn_category_wall_pro_categories_custom');
+		$ids = $type == 'all' ? [] : ($type == 'selected'
+			? $setting['module_ocn_category_wall_pro_categories_selected']
+			: $setting['module_ocn_category_wall_pro_categories_custom']);
 		
 		$categories = [];
 		switch ($type) {
@@ -32,15 +32,15 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 				break;
 		}
 
-		$data['height_status'] = $this->config->get('module_ocn_category_wall_pro_height_status');
-		$data['image_status'] = $this->config->get('module_ocn_category_wall_pro_image_status');
-		$data['subcategory_collapse_status'] = $this->config->get('module_ocn_category_wall_pro_subcategory_collapse_status');
+		$data['height_status'] = $setting['module_ocn_category_wall_pro_height_status'];
+		$data['image_status'] = $setting['module_ocn_category_wall_pro_image_status'];
+		$data['subcategory_collapse_status'] = $setting['module_ocn_category_wall_pro_subcategory_collapse_status'];
 
 		foreach ($categories as $category) {
 			// Level 2
 			$children_data = [];
 
-			if ($this->config->get('module_ocn_category_wall_pro_subcategory_status')) {
+			if ($setting['module_ocn_category_wall_pro_subcategory_status']) {
 				$children = $this->model_extension_module_ocn_category_wall_pro->getCategories($category['category_id'], $limit);
 
 				foreach ($children as $child) {
@@ -56,14 +56,14 @@ class ControllerExtensionModuleOCNCategoryWallPro extends Controller {
 			$image = '';
 			if ($data['image_status']) {
 				if ($category['image']) {
-					$image = $this->model_tool_image->resize($category['image'], $this->config->get('module_ocn_category_wall_pro_image_width'), $this->config->get('module_ocn_category_wall_pro_image_height'));
+					$image = $this->model_tool_image->resize($category['image'], $setting['module_ocn_category_wall_pro_image_width'], $setting['module_ocn_category_wall_pro_image_height']);
 				} else {
-					$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('module_ocn_category_wall_pro_image_width'), $this->config->get('module_ocn_category_wall_pro_image_height'));
+					$image = $this->model_tool_image->resize('placeholder.png', $setting['module_ocn_category_wall_pro_image_width'], $setting['module_ocn_category_wall_pro_image_height']);
 				}
 			}
 
 			$description = '';
-			if ($this->config->get('module_ocn_category_wall_pro_description_status') && $category['description'] && $category['description'] != '') {
+			if ($setting['module_ocn_category_wall_pro_description_status'] && $category['description'] && $category['description'] != '') {
 				$description = trim(strip_tags(html_entity_decode($category['description'], ENT_QUOTES, 'UTF-8')));
 				if ($length) {
 					$description = utf8_substr($description, 0, $length) . '...';
