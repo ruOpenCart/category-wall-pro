@@ -66,6 +66,15 @@
           </ul>
           <div class="tab-content">
             <div class="tab-pane fade in active" id="tab-general">
+          	  <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="name" value="{{ name }}" placeholder="{{ entry_name }}" id="input-name" class="form-control" />
+                  {% if error_name %}
+                  <div class="text-danger">{{ error_name }}</div>
+                  {% endif %}
+                </div>
+              </div>            
               <ul class="nav nav-tabs" id="language">
                 {% for language in languages %}
                   <li {% if loop.first %}class="active"{% endif %}><a href="#language{{ language.language_id }}" data-toggle="tab"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /> {{ language.name }}</a></li>
@@ -77,7 +86,7 @@
                   <div class="form-group required">
                     <label class="col-sm-2 control-label" for="input-title--{{ language.language_id }}">{{ entry_title }}</label>
                     <div class="col-sm-10">
-                      <input type="text" name="module_ocn_category_wall_pro_title--{{ language.language_id }}" value="{{ module_ocn_category_wall_pro_title[language.language_id] }}" placeholder="{{ entry_title }}" id="input-title--{{ language.language_id }}" class="form-control">
+                      <input type="text" name="module_ocn_category_wall_pro_title[{{ language.language_id }}][title]" value="{{ module_ocn_category_wall_pro_title[language.language_id]['title'] }}" placeholder="{{ entry_title }}" id="input-title--{{ language.language_id }}" class="form-control">
                       {% if error_title[language.language_id] %}
                         <div class="text-danger">{{ error_title[language.language_id] }}</div>
                       {% endif %}
@@ -90,9 +99,9 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
                 <div class="col-sm-10">
-                  <select name="module_ocn_category_wall_pro_status" id="input-status" class="form-control">
-                    <option value="1" {% if module_ocn_category_wall_pro_status == 1 %}selected="selected"{% endif %}>{{ text_enabled }}</option>
-                    <option value="0" {% if module_ocn_category_wall_pro_status == 0 %}selected="selected"{% endif %}>{{ text_disabled }}</option>
+                  <select name="status" id="input-status" class="form-control">
+                    <option value="1" {% if status == 1 %}selected="selected"{% endif %}>{{ text_enabled }}</option>
+                    <option value="0" {% if status == 0 %}selected="selected"{% endif %}>{{ text_disabled }}</option>
                   </select>
                 </div>
               </div>
