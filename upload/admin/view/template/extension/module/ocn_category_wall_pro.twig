@@ -23,12 +23,15 @@
     {% if error_warning %}
     <div class="alert alert-danger alert-dismissible">
       <i class="fa fa-exclamation-circle"></i> {{ error_warning }} <button type="button" class="close" data-dismiss="alert">&times;</button>
-      {% if error_title or error_width or error_height or error_length or error_limit or error_categories_selected_minimum or error_categories_custom_minimum %}
+      {% if error_title or error_name or error_width or error_height or error_length or error_limit or error_categories_selected_minimum or error_categories_custom_minimum %}
         <ul>
           {% if error_title %}
             {% for title in error_title %}
               <li class="text-muted">{{ title }}</li>
             {% endfor %}
+          {% endif %}
+          {% if error_name %}
+            <li class="text-muted">{{ error_name }}</li>
           {% endif %}
           {% if error_width %}
             <li class="text-muted">{{ error_width }}</li>
@@ -66,7 +69,7 @@
           </ul>
           <div class="tab-content">
             <div class="tab-pane fade in active" id="tab-general">
-          	  <div class="form-group">
+              <div class="form-group required">
                 <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
                 <div class="col-sm-10">
                   <input type="text" name="name" value="{{ name }}" placeholder="{{ entry_name }}" id="input-name" class="form-control" />
@@ -74,7 +77,26 @@
                   <div class="text-danger">{{ error_name }}</div>
                   {% endif %}
                 </div>
-              </div>            
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                <div class="col-sm-10">
+                  <select name="status" id="input-status" class="form-control">
+                    <option value="1" {% if status == 1 %}selected="selected"{% endif %}>{{ text_enabled }}</option>
+                    <option value="0" {% if status == 0 %}selected="selected"{% endif %}>{{ text_disabled }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-height-status">{{ entry_height_status }}</label>
+                <div class="col-sm-10">
+                  <select name="module_ocn_category_wall_pro_height_status" id="input-height-status" class="form-control">
+                    <option value="1" {% if module_ocn_category_wall_pro_height_status == 1 %}selected="selected"{% endif %}>{{ text_enabled }}</option>
+                    <option value="0" {% if module_ocn_category_wall_pro_height_status == 0 %}selected="selected"{% endif %}>{{ text_disabled }}</option>
+                  </select>
+                </div>
+              </div>
+              <hr>
               <ul class="nav nav-tabs" id="language">
                 {% for language in languages %}
                   <li {% if loop.first %}class="active"{% endif %}><a href="#language{{ language.language_id }}" data-toggle="tab"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /> {{ language.name }}</a></li>
@@ -94,25 +116,6 @@
                   </div>
                 </div>
                 {% endfor %}
-              </div>
-              <hr>
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
-                <div class="col-sm-10">
-                  <select name="status" id="input-status" class="form-control">
-                    <option value="1" {% if status == 1 %}selected="selected"{% endif %}>{{ text_enabled }}</option>
-                    <option value="0" {% if status == 0 %}selected="selected"{% endif %}>{{ text_disabled }}</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-height-status">{{ entry_height_status }}</label>
-                <div class="col-sm-10">
-                  <select name="module_ocn_category_wall_pro_height_status" id="input-height-status" class="form-control">
-                    <option value="1" {% if module_ocn_category_wall_pro_height_status == 1 %}selected="selected"{% endif %}>{{ text_enabled }}</option>
-                    <option value="0" {% if module_ocn_category_wall_pro_height_status == 0 %}selected="selected"{% endif %}>{{ text_disabled }}</option>
-                  </select>
-                </div>
               </div>
             </div>
             <div class="tab-pane fade" id="tab-category">
